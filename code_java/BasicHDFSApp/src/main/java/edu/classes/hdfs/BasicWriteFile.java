@@ -29,11 +29,15 @@ public class BasicWriteFile {
         // Initialize configuration instance
         Configuration conf = new Configuration();
 
+        // conf.addResource(new Path("file:///usr/lib/hadoop/etc/hadoop/hdfs-site.xml"));
+
         // Set system system as destination
-        conf.setStrings("fs.default.name", "hdfs://localhost:9000");
+        conf.set("fs.defaultFS", "hdfs://localhost:9000");
 
         // Set block size
         conf.setInt("dfs.block.size",16777216); /* 16MB */
+
+        // conf.setInt("dfs.replication", 1);
 
         return conf;
     }

@@ -23,10 +23,9 @@ fi
 
 
 # Hadoop configuration
-# export HADOOP_HOME=/usr/lib/hadoop
+export HADOOP_HOME=/usr/lib/hadoop
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
-PATH=/usr/lib/hadoop/bin:$PATH
-PATH=/usr/lib/spark/bin:$PATH
-
-export HADOOP_CONF_DIR=/usr/lib/hadoop/etc/hadoop
+PATH=$HADOOP_HOME/bin:$PATH
+# PATH=/usr/lib/spark/bin:$PATH
 
