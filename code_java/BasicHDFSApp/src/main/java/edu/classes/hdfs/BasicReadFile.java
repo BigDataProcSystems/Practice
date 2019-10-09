@@ -6,7 +6,6 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IOUtils;
 
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.net.URI;
 
 

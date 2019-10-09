@@ -1,5 +1,5 @@
 # Introduction to HDFS
-### Sergei Yu. Papulin (papulin_bmstu@mail.ru)
+Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 
 #### [Version 2018](https://github.com/BigDataProcSystems/Hadoop/blob/2018/hdfs_basics.ipynb)
 
@@ -114,7 +114,7 @@ Common Java project
 7) In emerged message box click `Import changes`
 
 ### Add dependencies to `pom.xml`
-```
+```xml
     <dependencies>
         <dependency>
             <groupId>org.apache.hadoop</groupId>

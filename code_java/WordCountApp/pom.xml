@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>edu.classes.hdfs</groupId>
-    <artifactId>basic-hdfs-app</artifactId>
+    <groupId>edu.classes.mr</groupId>
+    <artifactId>word-count-app</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <build>
@@ -28,22 +28,10 @@
             <version>3.1.0</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>3.1.0</version>
-        </dependency>
-        <!--<dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-client</artifactId>
-            <version>3.1.2</version>
-            <scope>system</scope>
-            <systemPath>/usr/lib/hadoop/share/hadoop/client/hadoop-client-api-3.1.2.jar</systemPath>
-        </dependency>-->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
-            <scope>test</scope>
+            <groupId>org.apache.mrunit</groupId>
+            <artifactId>mrunit</artifactId>
+            <version>1.0.0</version>
+            <classifier>hadoop2</classifier>
         </dependency>
     </dependencies>
 
