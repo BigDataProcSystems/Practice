@@ -1,6 +1,27 @@
 # Introduction to YARN
 Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 
+## Contents
+
+- Prerequisites
+- Configuration files
+- Scheduler
+    - Capacity scheduler
+    - Queue hierarchy
+    - Refreshing queue configuration
+    - Others
+- Run applications
+- References
+
+## Prerequisites
+
+To get started, you need to have done the following:
+
+- Install Ubuntu 14+
+- Install Java 8
+- Download Hadoop 3+
+- Install IntelliJ 2019+ (for Java code)
+
 
 ## Configuration files
 
@@ -20,17 +41,16 @@ YARN specific configuration files:
 
 Precedence rules:
 
-`yarn-env.sh` > `hadoop-env.sh` > hard-coded defaults
+- `yarn-env.sh` > `hadoop-env.sh` > hard-coded defaults
+- `YARN_xyz` > `HADOOP_xyz` > hard-coded defaults
 
-`YARN_xyz` > `HADOOP_xyz` > hard-coded defaults
-
+The configuration files you can find [here](/config/) 
 
 ### Memory allocation and vcores
 
 NodeManager memory
 
 Container memory
-
 
 ## Scheduler
 
@@ -47,8 +67,6 @@ mrapp.dev | 80% | -
 mrapp.prod | 20% | -
 sparkapp | 5% | 10%
 default | 5% | 10%
-
-### 
 
 To specify a queue to use you can directly write rules in `capacity-scheduler.xml`.
 
@@ -75,19 +93,16 @@ To edit by file, you need to edit `capacity-scheduler.xml` and run `yarn rmadmin
 
 
 Deleting queue via file
-<div style="margin-left: 2rem;">
-Step 1: Stop the queue
 
-Step 2: Delete the queue
-
-Step 3: Run `yarn rmadmin -refreshQueues`
-</div>
+- Step 1: Stop the queue
+- Step 2: Delete the queue
+- Step 3: Run `yarn rmadmin -refreshQueues`
 
 ### Others
 
+Full configurations you can find in `config/yarn` and `config/mapreduce`.
 
-
-[Hadoop: Capacity Scheduler](https://hadoop.apache.org/docs/r3.1.2/hadoop-yarn/hadoop-yarn-site/CapacityScheduler.html)
+To read more about configuring the Capacity Scheduler, go to the link: [Hadoop: Capacity Scheduler](https://hadoop.apache.org/docs/r3.1.2/hadoop-yarn/hadoop-yarn-site/CapacityScheduler.html)
 
 
 ## Run applications
@@ -105,15 +120,25 @@ For a single node cluster, tasks can fail due to resource scarcity. In this case
 </property>
 ```
 
-### Download and unpack dataset
+### Modifying `mapred-site.xml` to enable MapReduce on YARN mode
+
+Here is the path to the configuration file with correct settings: `config/mapreduce/mapred-site.xml`
+
+### Downloading and unpacking dataset
+
+Create a new directory for a dataset:
 
 `mkdir -p ~/datasets/reviews`
 
+Download the dataset archive of customers' reviews
+
 `wget -P ~/datasets/reviews/ http://snap.stanford.edu/data/amazon/productGraph/categoryFiles/reviews_Electronics_5.json.gz`
+
+Unpack the archive
 
 `gzip -dk ~/datasets/reviews/reviews_Electronics_5.json.gz`
 
-### Run HDFS and YARN
+### Starting HDFS and YARN
 
 `$HADOOP_HOME/sbin/start-dfs.sh`
 
@@ -123,8 +148,16 @@ For a single node cluster, tasks can fail due to resource scarcity. In this case
 
 `jps`
 
-### Run application
+### Running application
+
+Remove the output directory if exists:
 
 `hdfs dfs -rm -r -f /data/yarn/output`
 
+Run a MapReduce example:
+
 `yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.1.2.jar wordcount -D mapreduce.job.reduces=2 /data/yarn/reviews_Electronics_5.json /data/yarn/output`
+
+### YARN dashboard
+
+`http://localhost:8088`

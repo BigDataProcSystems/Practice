@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -13,19 +14,24 @@ import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+import org.apache.hadoop.util.Tool;
+import org.apache.hadoop.util.ToolRunner;
 
 
 /**
  * The WordCount class provides word count example
  *
+ * The Tool interface supports handling of generic command-line options.
+ * For example, the number of reduces as shown below.
+ *
  * To run in terminal:
- * yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.1.2.jar wordcount \
+ * yarn jar word-count-app.jar \
  *      -D mapreduce.job.reduces=2 \
  *      /data/yarn/reviews_Electronics_5.json \
  *      /data/yarn/output
- *
+ *.
  */
-public class WordCount {
+public class WordCount extends Configured implements Tool {
 
 
     /**
@@ -82,18 +88,10 @@ public class WordCount {
         }
     }
 
-    /**
-     * The application's entry point
-     *
-     * @param args an array of command-line arguments for the application
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
-
-        Configuration conf = new Configuration();
+    public int run(String[] args) throws Exception {
 
         // Create a new MapReduce job
-        Job job = Job.getInstance(conf, "word count");
+        Job job = Job.getInstance(getConf(), "WordCountApp");
 
         //  Set the Jar by finding where a given class came from
         job.setJarByClass(WordCount.class);
@@ -120,6 +118,23 @@ public class WordCount {
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
         // Submit the job to the cluster and wait for it to finish
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        return job.waitForCompletion(true) ? 0 : 1;
+    }
+
+    /**
+     * The application's entry point
+     *
+     * @param args an array of command-line arguments for the application
+     * @throws Exception
+     */
+    public static void main(String[] args) throws Exception {
+        Configuration conf = new Configuration();
+
+        /*
+          Runs the given Tool by Tool.run(String[]), after
+          parsing with the given generic arguments. Uses the given
+          Configuration, or builds one if null.
+         */
+        System.exit(ToolRunner.run(conf, new WordCount(), args));
     }
 }
