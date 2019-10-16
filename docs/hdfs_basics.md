@@ -97,9 +97,9 @@ Maven project
 
 Project structure:
 ```
-src --> main/
-    |
-    +-> test/
+App --> src --> main/
+    |       |
+    |       --> test/
     |
     --> pom.xml
 ```
