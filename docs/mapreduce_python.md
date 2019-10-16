@@ -37,11 +37,11 @@ To get started, you need to have done the following:
 
 Mapper
 
-[tokenizer_mapper.py](/code_scala/WordCountApp/src/main/scala/edu/classes/mr/WordCount.scala)
+[tokenizer_mapper.py](/code_py/wordcountapp/tokenizer_mapper.py)
 
 Combiner/Reducer
 
-[intsum_reducer.sbt](/code_scala/WordCountApp/build.sbt)
+[intsum_reducer.py](/code_py/wordcountapp/intsum_reducer.py)
 
 ## Running MapReduce with local files
 
