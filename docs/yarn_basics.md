@@ -158,6 +158,8 @@ Run a MapReduce example:
 
 `yarn jar $HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.1.2.jar wordcount -D mapreduce.job.reduces=2 /data/yarn/reviews_Electronics_5.json /data/yarn/output`
 
+Check out the output directory. There should be two files whose names start with `part-r-0000x`. They are the files where the result is stored.
+
 ### YARN dashboard
 
 `http://localhost:8088`
