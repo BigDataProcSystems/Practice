@@ -16,5 +16,3 @@ for input_line in sys.stdin:
     
         running_total = value
         last_key = this_key
-
-    
