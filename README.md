@@ -12,5 +12,6 @@
 
 ### MapReduce
 - MapReduce: [Lecture](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_MapReduce.pdf)
-- Introduction to MapReduce: [Seminar](docs/mapreduce_basics.md)
-
+- Introduction to MapReduce: [Seminar (Part 1)](docs/mapreduce_basics.md)
+- MapReduce and Scala: [Seminar (Part 2)](docs/mapreduce_scala.md)
+- MapReduce and Python: [Seminar (Part 3)](docs/mapreduce_python.md)
