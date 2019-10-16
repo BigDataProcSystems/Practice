@@ -155,7 +155,7 @@ Command to run `jar` file:
 
 For the word count application, the command will be as below:
 
-`yarn jar ./target/word-count-app-1.0.jar edu.classes.mr.WordCount -D mapreduce.job.reduces=2 /data/yarn/reviews_Electronics_5_2.json /data/yarn/output`
+`yarn jar ./target/word-count-app-1.0.jar -D mapreduce.job.reduces=2 /data/yarn/reviews_Electronics_5_2.json /data/yarn/output`
 
 Remove the output directory if needed:
 
