@@ -28,7 +28,7 @@ To get started, you need to have done the following:
 - `spark/bin/` - spark commands (`spark-submit`, `spark-shell`, `pyspark` etc.)
 - `spark/sbin/` - scripts to start/stop Spark daemons
 - `spark/conf/` - configuration
-- `spark/logs/` - hadoop logs
+- `spark/logs/` - spark logs
 
 
 #### Spark configuration
