@@ -1,4 +1,4 @@
-# Calculating average with MapReduce and using Custom Counters
+# Calculating average ratings and using custom Counters
 Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 
 #### [Version 2018](https://nbviewer.jupyter.org/github/BigDataProcSystems/Hadoop/blob/2018/mapreduce_basics.ipynb)
