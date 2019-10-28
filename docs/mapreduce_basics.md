@@ -166,17 +166,18 @@ Remove the output directory if needed:
 
 ### Priority
 
-1. `yarn jar` command line settings: 
+1. In Java code settings: 
+
+```java
+job.setNumReduceTasks(2);
+```
+
+2. `yarn jar` command line settings: 
 
 ```cmd
 -D mapreduce.job.reduces=2
 ```
 
-2. In Java code settings: 
-
-```java
-job.setNumReduceTasks(2);
-```
 
 3. `yarn-site.xml` and `mapred-site.xml`: 
 
