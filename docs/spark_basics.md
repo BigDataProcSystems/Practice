@@ -45,7 +45,7 @@ Modify the aforementioned configuration files in the following way:
 ```
 # Spark configuration
 export SPARK_HOME=/usr/lib/spark
-export SPARK_CONF_DIR=$SPARK/conf
+export SPARK_CONF_DIR=$SPARK_HOME/conf
 PATH=$SPARK_HOME/bin:$PATH
 ```
 
@@ -53,9 +53,10 @@ PATH=$SPARK_HOME/bin:$PATH
 
 ```
 export SPARK_MASTER_HOST=localhost
-export SPARK_EXECUTOR_MEMORY=512M
+export SPARK_EXECUTOR_MEMORY=1G # overriden by spark-defaults.conf
 export PYSPARK_DRIVER_PYTHON=/opt/anaconda3/bin/python
 export PYSPARK_PYTHON=/opt/anaconda3/bin/python
+
 ```
 
 `spark-defaults.conf`
@@ -64,6 +65,9 @@ export PYSPARK_PYTHON=/opt/anaconda3/bin/python
 spark.master		yarn
 spark.driver.cores	2
 spark.driver.memory	1g
+
+spark.executor.cores	1
+spark.executor.memory	512m
 
 spark.eventLog.enabled	true
 spark.eventLog.dir file:///tmp/spark-events
@@ -85,19 +89,24 @@ Or load configurations dynamically:
 - Using command line flags (e.g. `--master`, `--conf` etc.) for `spark-submit`, `spark-shell`, `pyspark`
 - Inside application code by setting context configurations  
 
-## Starting cluster
+## Starting Spark on YARN cluster
 
-`$SPARK_HOME/sbin/start-all.sh`
+Run `HDFS` and `YARN`
+
+`$HADOOP_HOME/sbin/start-dfs.sh && $HADOOP_HOME/sbin/start-yarn.sh`
+
+Run `History Server`
 
 `$SPARK_HOME/sbin/start-history-server.sh`
+
+Check whether all daemons are running
 
 `jps`
 
 
 Web UI:
-
-- Spark Cluster port: `8080`
 - Spark History Server port: `18080`
+- Spark Cluster port: `8080` (for standalone cluster mode)
 
 ## Running sample application
 
@@ -121,14 +130,11 @@ Welcome to
 
 Using Python version 3.7.3 (default, Mar 27 2019 22:11:17)
 SparkSession available as 'spark'.
->>> 
-
-
+>>> rdd_data = spark.sparkContext.parallelize(range(100))
+>>> rdd_data.reduce(lambda x,y: x + y)
+4950   
 ```
-```python
-rdd_data = spark.sparkContext.parallelize(range(100))
-rdd_data.reduce(lambda x,y: x + y)
-````
+
 
 #### Scala interactive mode
 
@@ -151,8 +157,11 @@ Using Scala version 2.11.8 (OpenJDK 64-Bit Server VM, Java 1.8.0_222)
 Type in expressions to have them evaluated.
 Type :help for more information.
 
-scala> 
+scala> val rdd_data = sc.parallelize(0 to 99)
+rdd_data: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[1] at parallelize at <console>:24
 
+scala> rdd_data.reduce(_+_)
+res1: Int = 4950
 ```
 
 ## Spark and Jupyter
@@ -203,3 +212,6 @@ Run `Jupyter` and select the `spark-python` kernel
 
 
 
+## References 
+
+- [Running Spark on YARN](https://spark.apache.org/docs/2.3.0/running-on-yarn.html)
