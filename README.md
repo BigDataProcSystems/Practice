@@ -29,3 +29,14 @@
 
 
 ### Spark MLlib
+
+#### RDD
+
+- [Регрессия, классификация и кластеризация и Spark](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_RDD/blob/master/spark_rdd_ml_basics.ipynb)
+- [Классификация текстовых документов в Spark](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_RDD/blob/master/spark_rdd_spam_classification.ipynb)
+
+#### Dataframe
+
+- [Факторизация матрицы рейтингов и Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_Dataframe/blob/master/spark_df_movie_recommendation.ipynb)
+- [Boston House Price and Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_Dataframe/blob/master/spark_df_price_regression_cv.ipynb)
+- [Комбинация решающих деревьев и Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_Dataframe/blob/master/spark_df_purchase_tree.ipynb)
