@@ -105,6 +105,7 @@ Check whether all daemons are running
 
 
 Web UI:
+- YARN Resource Manager port: `8088`
 - Spark History Server port: `18080`
 - Spark Cluster port: `8080` (for standalone cluster mode)
 
