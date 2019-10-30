@@ -18,11 +18,11 @@ public class AvgRatingMapper extends Mapper<Object, Text, Text, StatsTupleWritab
 
     public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 
-        // Initialize review variable
+        // Review variable
         Review review;
 
         try {
-            // Assign an object to the variable
+            // Assign a review instance to the variable
             review = gson.fromJson(value.toString(), Review.class);
         }
         catch (JsonParseException e) {
