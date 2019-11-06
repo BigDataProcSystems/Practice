@@ -9,7 +9,7 @@
 - [User-Defined Functions (UDF) in PySpark](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_PySpark_UDF.pdf)
 
 #### Seminars:
-- [Configuring Spark](docs/spark_basics.md)
+- [Configuring Spark on YARN](docs/spark_basics.md)
 - [Introduction to Spark App](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_RDD/blob/master/spark_rdd_intro.ipynb)
 - [Introduction to PySpark RDD](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_RDD/blob/master/spark_rdd_basics.ipynb)
 - [Introduction to PySpark Dataframe](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Dataframe/blob/master/spark_df_basics.ipynb)
