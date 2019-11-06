@@ -19,14 +19,13 @@
 ### Spark Streaming
 
 #### Lectures:
+
 - [Spark Streaming](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Spark_Streaming.pdf)
 
 #### Seminars:
-- [Introduction to Spark Streaming](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Streaming/blob/master/spark_streaming_intro.ipynb)
-- [Spark Streaming with Kafka](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Streaming/blob/master/spark_streaming_kafka.ipynb)
-- [Spark Streaming with Kafka and Twitter API](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Streaming/blob/master/spark_streaming_kafka_tweets.ipynb)
-- [Spark Streaming with Kafka and Sklearn](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Streaming/blob/master/spark_streaming_spam_classification.ipynb)
 
+- [Introduction to Spark Streaming](docs/spark_streaming.md)
+- [Introduction to Kafka distributed message broker](docs/kafka_basics.md)
 
 ### Spark MLlib
 
