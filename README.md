@@ -1,6 +1,6 @@
 # Main topics
 
-## 2019
+## Current
 
 ### Spark Basics
 
@@ -15,6 +15,7 @@
 - [Introduction to PySpark Dataframe](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Dataframe/blob/master/spark_df_basics.ipynb)
 - [PySpark and Jupyter](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_RDD/blob/master/spark_rdd_jupyter.ipynb)
 - [UDF in PySpark](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Dataframe/blob/master/spark_udf.ipynb)
+- [Spark and Jupyter with Livy as Spark REST Server](docs/spark_livy_jupyter.md)
 
 ### Spark Streaming
 
