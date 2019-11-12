@@ -67,6 +67,7 @@ Install `redis-py`:
 
 ## Web service
 
+[Source code](https://github.com/BigDataProcSystems/Spark_Streaming/tree/master/projects/webservice/service/WordCountService)
 
 ```
 ./src
@@ -110,7 +111,7 @@ Install `redis-py`:
 
 #### Kafka consumer
 
-Apply the Kafka consumer as an input source. Below code snippet exemplifies how to use Kafka inside a `Spark Streaming` application. The full source code is available [here]()
+Apply the Kafka consumer as an input source. Below code snippet exemplifies how to use Kafka inside a `Spark Streaming` application. The full source code is available [here](https://github.com/BigDataProcSystems/Spark_Streaming/tree/master/projects/webservice/sparkstreaming)
 
 ```python
 import json
