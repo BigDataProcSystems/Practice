@@ -27,6 +27,7 @@
 
 - [Introduction to Spark Streaming](docs/spark_streaming.md)
 - [Introduction to Kafka distributed message broker](docs/kafka_basics.md)
+- [Web Service with Spark Streaming and Kafka](docs/spark_streaming_service.md)
 
 ### Spark MLlib
 
