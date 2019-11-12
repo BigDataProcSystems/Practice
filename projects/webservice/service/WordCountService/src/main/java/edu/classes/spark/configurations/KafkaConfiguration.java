@@ -1,4 +1,4 @@
-package edu.classes.spark.producer;
+package edu.classes.spark.configurations;
 
 import edu.classes.spark.models.Message;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class MessageProducerConfig {
+public class KafkaConfiguration {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
@@ -25,7 +25,6 @@ public class MessageProducerConfig {
 
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 

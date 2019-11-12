@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface IWordCountService {
     void submitMessage(Message message);
-    List<WordCountPair> getTopWords();
+    List<WordCountPair> getTop10Words();
+    List<WordCountPair> getWordCount();
 }
