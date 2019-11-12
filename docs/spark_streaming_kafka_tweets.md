@@ -220,3 +220,15 @@ Open four terminals:
 
     `spark-submit --master local[2] --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2 ./spark_streaming_app.py`
 
+
+## References
+
+[Spark Streaming Programming Guide](https://spark.apache.org/docs/2.3.0/streaming-programming-guide.html)
+
+[Kafka Python client](https://github.com/dpkp/kafka-python)
+
+[Kafka configuration](https://kafka.apache.org/documentation/#configuration)
+
+[Tweepy: Twitter for Python!](https://github.com/tweepy/tweepy)
+
+[Spark Streaming + Kafka Integration Guide](https://spark.apache.org/docs/2.3.0/streaming-kafka-0-8-integration.html)
