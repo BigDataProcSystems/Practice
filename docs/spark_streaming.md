@@ -38,7 +38,7 @@ Some examples below require the `Kafka` server as a message broker, so follow [t
 
 [Spark Streaming with Kafka](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Streaming/blob/master/notebooks/spark_streaming_kafka.ipynb): Using Kafka as input source for Spark Streaming application
 
-[Spark Streaming with Kafka and Twitter API](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Streaming/blob/master/notebooks/spark_streaming_kafka_tweets.ipynb): Using Kafka producer with messages received from Twitter API and Spark Steaming application with Kafka Consumer as input source to process tweets
+[Spark Streaming with Kafka and Twitter API](https://github.com/BigDataProcSystems/Spark_Streaming/blob/master/docs/spark_streaming_kafka_tweets.md): Using Kafka producer with messages received from Twitter API and Spark Steaming application with Kafka Consumer as input source to process tweets
 
 [Spark Streaming with Kafka and Sklearn](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Streaming/blob/master/notebooks/spark_streaming_spam_classification.ipynb): Using spam classification model built with sklearn library in Spark Streaming application
 
