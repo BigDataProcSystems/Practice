@@ -69,6 +69,9 @@ Install `redis-py`:
 
 [Source code](https://github.com/BigDataProcSystems/Spark_Streaming/tree/master/projects/webservice/service/WordCountService)
 
+![Service Architecture Diagram](img/web_service_diagram.png "Service Architecture")
+<center><i>Figure 1. Web Service Architecture</i></center>
+
 ```
 ./src
 ├── main
@@ -105,7 +108,8 @@ Install `redis-py`:
 
 ## Twitter API
 
-
+![Service Architecture Diagram](img/web_service_twitter_diagram.png "Service Architecture")
+<center><i>Figure 2. Additional Kafka producer with Twitter API </i></center>
 
 ## Spark Streaming Application
 
@@ -199,12 +203,15 @@ Web UI:
 
 Start the `Zookeeper` Server:
 
-`sudo $ZOOKEEPER_HOME/bin/zkServer.sh start`
+$ZOOKEEPER_HOME/bin/zkServer.sh start`
 
 Run the `Kafka` server:
 
-`sudo $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties`
+`$KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties`
 
+#### Starting Redis Server
+
+`$REDIS_HOME/src/redis-server`
 
 #### Submitting Spark Streaming Application
 
@@ -214,7 +221,7 @@ Before we configured Spark to being run on `YARN`. So the following command runs
 
 To run locally use the command below:
 
-`spark-submit --master local[2] --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2 wordcount_streaming.py`
+`spark-submit --master local[2] --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2 wordcount_spark_streaming.py`
 
 #### Launching Web Service
 
