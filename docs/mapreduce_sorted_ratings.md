@@ -5,13 +5,10 @@ Sergei Yu. Papulin (papulin.study@mail.ru)
 
 - Prerequisites
 - Configuration
-- MapReduce configuration
 - Creating Java project in IntelliJ
 - Source code in Java
-- Running MapReduce with local files
-- Building `jar` file with `maven`
-- Running MapReduce `jar` file on YARN cluster
-- References
+- Partitioning and sorting by custom key
+- Grouping by custom key
 
 ## Prerequisites
 
