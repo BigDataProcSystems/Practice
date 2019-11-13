@@ -28,7 +28,7 @@ public class WordCountAPIServiceController {
         return new ResponseEntity<>(service.getTop10Words(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "api/v1/word-count")
+    @GetMapping(value = "api/v1/word-counts")
     public ResponseEntity<List<WordCountPair>> getWordCount() {
         return new ResponseEntity<>(service.getWordCount(), HttpStatus.OK);
     }

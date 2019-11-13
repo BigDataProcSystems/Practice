@@ -24,13 +24,13 @@ public class WordCountWebServiceController {
     public String getWordCounts(Model model) {
         List<WordCountPair> words = service.getWordCount();
         model.addAttribute("words", words);
-        return "top_words";
+        return "word_counts";
     }
 
     @GetMapping("/top-words")
     public String getTop10Words(Model model) {
         List<WordCountPair> words = service.getTop10Words();
         model.addAttribute("words", words);
-        return "word_counts";
+        return "top_words";
     }
 }

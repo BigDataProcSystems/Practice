@@ -26,7 +26,7 @@ public class WordCountService implements IWordCountService {
     private String topic;
 
     @Value("${app.data_keys.word_counts}")
-    private String key_word_count;
+    private String key_word_counts;
 
     @Value("${app.data_keys.top_10_words}")
     private String key_top_10_words;
@@ -41,11 +41,11 @@ public class WordCountService implements IWordCountService {
 
         List<WordCountPair> result = new ArrayList<>();
 
-        Set<ZSetOperations.TypedTuple<String>> topWordsSet = redisTemplate.opsForZSet().reverseRangeByScoreWithScores(key_top_10_words, 0, 100);
+        Set<ZSetOperations.TypedTuple<String>> topWordsSet = redisTemplate.opsForZSet().rangeByScoreWithScores(key_top_10_words, Long.MIN_VALUE, 0);
 
         for (ZSetOperations.TypedTuple<String> item : topWordsSet) {
             WordCountPair pair = new WordCountPair(item.getValue(),
-                    item.getScore() != null ? (int) Math.round(item.getScore()) : 0);
+                    item.getScore() != null ? (int) Math.round(Math.abs(item.getScore())) : 0);
             result.add(pair);
         }
 
@@ -57,11 +57,14 @@ public class WordCountService implements IWordCountService {
 
         List<WordCountPair> result = new ArrayList<>();
 
-        Set<ZSetOperations.TypedTuple<String>> topWordsSet = redisTemplate.opsForZSet().reverseRangeByScoreWithScores(key_word_count, 0, 100);
+        Set<ZSetOperations.TypedTuple<String>> wordsSet = redisTemplate.opsForZSet().rangeByScoreWithScores(key_word_counts, Long.MIN_VALUE, 0);
 
-        for (ZSetOperations.TypedTuple<String> item : topWordsSet) {
+        // System.out.println(wordsSet.toString());
+
+
+        for (ZSetOperations.TypedTuple<String> item : wordsSet) {
             WordCountPair pair = new WordCountPair(item.getValue(),
-                    item.getScore() != null ? (int) Math.round(item.getScore()) : 0);
+                    item.getScore() != null ? (int) Math.round(Math.abs(item.getScore())) : 0);
             result.add(pair);
         }
 

@@ -31,11 +31,17 @@ def update_total_count(current_count, count_state):
 
 
 def save_partition_in_redis(partition):
-    """Insert/update word count pairs in Redis for each partition"""
+    """
+    Insert/update word count pairs in Redis for each partition
+
+    Note: minus for the count variable in r.zadd() is a workaround to
+    guarantee lex ordering when word counts have the same value.
+    It is necessary to remove the sign when consume this Redis sorted set.
+    """
     import redis
     r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, charset=REDIS_CHARSET, decode_responses=REDIS_DECODE_RESPONSES)
     for row in partition:
-        r.zadd(REDIS_KEY_WORD_COUNT, {row[0]: row[1]})
+        r.zadd(REDIS_KEY_WORD_COUNT, {row[0]: -row[1]})
 
 
 def save_rdd_in_redis(time, rdd):
@@ -44,13 +50,19 @@ def save_rdd_in_redis(time, rdd):
 
 
 def save_top_10_in_redis(time, rdd):
-    """Insert/update top 10 words """
+    """
+    Insert/update top 10 words
+
+    Note: minus for the count variable in r.zadd() is a workaround to
+    guarantee lex ordering when word counts have the same value.
+    It is necessary to remove the sign when consume this Redis sorted set.
+    """
     import redis
     r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, charset=REDIS_CHARSET, decode_responses=REDIS_DECODE_RESPONSES)
     r.delete(REDIS_KEY_TOP_10_WORD)
     top_10_words = rdd.takeOrdered(10, key=lambda x: -x[1])
     for word, count in top_10_words:
-        r.zadd(REDIS_KEY_TOP_10_WORD, {word: count})
+        r.zadd(REDIS_KEY_TOP_10_WORD, {word: -count})
 
 
 # Create Spark Context
