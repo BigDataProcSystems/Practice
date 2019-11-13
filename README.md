@@ -18,6 +18,7 @@
     - [MapReduce and Scala](docs/mapreduce_scala.md)
     - [MapReduce and Python](docs/mapreduce_python.md)
     - [Calculating average ratings and using custom counters](docs/mapreduce_average_counters.md)
+    - [Sorted ratings with Partitioner, SortComparator and GroupingComparator](docs/mapreduce_sorted_ratings.md)
 
 ## Archive
 
