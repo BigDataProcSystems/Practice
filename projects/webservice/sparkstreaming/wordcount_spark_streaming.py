@@ -36,7 +36,7 @@ def save_partition_in_redis(partition):
 
     Note: minus for the count variable in r.zadd() is a workaround to
     guarantee lex ordering when word counts have the same value.
-    It is necessary to remove the sign when consume this Redis sorted set.
+    The sign should be removed when consume this Redis sorted set.
     """
     import redis
     r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, charset=REDIS_CHARSET, decode_responses=REDIS_DECODE_RESPONSES)
@@ -55,7 +55,7 @@ def save_top_10_in_redis(time, rdd):
 
     Note: minus for the count variable in r.zadd() is a workaround to
     guarantee lex ordering when word counts have the same value.
-    It is necessary to remove the sign when consume this Redis sorted set.
+    The sign should be removed when consume this Redis sorted set.
     """
     import redis
     r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, charset=REDIS_CHARSET, decode_responses=REDIS_DECODE_RESPONSES)
