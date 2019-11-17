@@ -34,7 +34,7 @@ Some examples below require the `Kafka` server as a message broker, so follow [t
 
 ## Practice
 
-[Introduction to Spark Streaming](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Streaming/blob/master/notebooks/spark_streaming_intro.ipynb): Stateless/stateful and window transformations 
+[Introduction to Spark Streaming](https://github.com/BigDataProcSystems/Spark_Streaming/blob/master/docs/spark_streaming_intro.md): Stateless/stateful and window transformations 
 
 [Spark Streaming with Kafka](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Streaming/blob/master/notebooks/spark_streaming_kafka.ipynb): Using Kafka as input source for Spark Streaming application
 
