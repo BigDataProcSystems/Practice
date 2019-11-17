@@ -70,7 +70,7 @@ api = tweepy.API(auth)
 
 """
 
-    LISTENER FOR MESSAGES FROM TWITTER
+    LISTENER TO MESSAGES FROM TWITTER
 
 
 """
