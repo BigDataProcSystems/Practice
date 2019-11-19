@@ -11,6 +11,31 @@ Sergei Yu. Papulin (papulin.study@yandex.ru)
 - Spark Streaming Application
 - Deploying Web Service and Spark Streaming application
 
+## Prerequisites
+
+General:
+
+- Ubuntu 14+
+- Java 8
+- Hadoop 3.2.0
+- Spark 2.3
+- Kafka 2.3.0
+- Redis 5.0.6
+
+Python coding (for `Spark Streaming App` and `Tweet Filter App`):
+- PyCharm or IntelliJ 2019.2 with Python Plugin
+- Python 3.7
+- python-kafka (for Kafka)
+- tweepy (for Twitter API)
+
+Java coding (for `Web Service`):
+- IntelliJ 2019.2
+- Spring Boot starters 2.1.8
+- Spring for Apache Kafka 2.2.0
+- Spring Data Redis 2.1.8
+- Jedis 2.9.3
+
+
 ## Spark configuration
 
 In this tutorial the default configuration involves deploying Spark on `YARN` cluster. So you should configure, and run `HDFS` and `YARN`.
@@ -104,7 +129,107 @@ Install `redis-py`:
 
 ```
 
+#### Running service
 
+`mvn spring-boot:run`
+
+Or create a `jar` file and run the service as follows:
+
+`java -jar ./target/wordcount-service-1.0.jar`
+
+#### Creating jar
+
+Create a `jar` executable file to run the service as a standalone application in the Tomcat container:
+
+`mvn clean package`
+
+
+```bash
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------< edu.classes.spark:wordcount-service >-----------------
+[INFO] Building wordcount-service 1.0
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ wordcount-service ---
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:resources (default-resources) @ wordcount-service ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Copying 3 resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:compile (default-compile) @ wordcount-service ---
+[INFO] Changes detected - recompiling the module!
+[INFO] Compiling 9 source files to /media/sf_Spark_Streaming/projects/webservice/service/WordCountService/target/classes
+[INFO] 
+[INFO] --- maven-resources-plugin:3.1.0:testResources (default-testResources) @ wordcount-service ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory /media/sf_Spark_Streaming/projects/webservice/service/WordCountService/src/test/resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:3.8.1:testCompile (default-testCompile) @ wordcount-service ---
+[INFO] Changes detected - recompiling the module!
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.22.2:test (default-test) @ wordcount-service ---
+[INFO] 
+[INFO] --- maven-jar-plugin:3.1.2:jar (default-jar) @ wordcount-service ---
+[INFO] Building jar: /media/sf_Spark_Streaming/projects/webservice/service/WordCountService/target/wordcount-service-1.0.jar
+[INFO] 
+[INFO] --- spring-boot-maven-plugin:2.1.8.RELEASE:repackage (repackage) @ wordcount-service ---
+[INFO] Replacing main artifact with repackaged archive
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  12.984 s
+[INFO] Finished at: 2019-11-19T13:09:51+03:00
+[INFO] ------------------------------------------------------------------------
+
+```
+
+The output jar file (`wordcount-service-1.0.jar`) has the following structure:
+
+```
+.
+├── BOOT-INF
+│   ├── classes
+│   │   ├── application.yml
+│   │   ├── edu
+│   │   │   └── classes
+│   │   │       └── spark
+│   │   │           ├── Application.class
+│   │   │           ├── configurations
+│   │   │           ├── controllers
+│   │   │           ├── models
+│   │   │           └── services
+│   │   └── templates
+│   └── lib
+├── META-INF
+│   ├── MANIFEST.MF
+│   └── maven
+│       └── edu.classes.spark
+│           └── wordcount-service
+│               ├── pom.properties
+│               └── pom.xml
+└── org
+    └── springframework
+        └── boot
+            └── loader
+```
+
+
+The `MANIFEST.MF` file looks as
+
+```
+Manifest-Version: 1.0
+Implementation-Title: wordcount-service
+Implementation-Version: 1.0
+Start-Class: edu.classes.spark.Application
+Spring-Boot-Classes: BOOT-INF/classes/
+Spring-Boot-Lib: BOOT-INF/lib/
+Build-Jdk-Spec: 1.8
+Spring-Boot-Version: 2.1.8.RELEASE
+Created-By: Maven Archiver 3.4.0
+Main-Class: org.springframework.boot.loader.JarLauncher
+```
 
 ## Twitter API
 
@@ -237,6 +362,36 @@ To run locally use the command below:
 
 #### Launching Web Service
 
+`java -jar ./target/wordcount-service-1.0.jar`
+
+
+```
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.8.RELEASE)
+
+
+......
+
+
+2019-11-19 13:36:51.407  INFO 9475 --- [           main] edu.classes.spark.Application            : Started Application in 9.698 seconds (JVM running for 10.986)
+2019-11-19 13:37:08.348  INFO 9475 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-11-19 13:37:08.349  INFO 9475 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-11-19 13:37:08.391  INFO 9475 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 42 ms
+```
+
+
+To stop the running service, you can press `CTRL-C` or find its `PID` by the command:
+
+`jps`
+
+And kill the process:
+
+`kill PID`
 
 
 # References
