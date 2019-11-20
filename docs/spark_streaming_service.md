@@ -8,6 +8,7 @@ Sergei Yu. Papulin (papulin.study@yandex.ru)
 - Kafka configuration
 - Installing and running Redis
 - Web service
+- Running as OS service
 - Spark Streaming Application
 - Deploying Web Service and Spark Streaming application
 
@@ -231,6 +232,95 @@ Created-By: Maven Archiver 3.4.0
 Main-Class: org.springframework.boot.loader.JarLauncher
 ```
 
+## Running as OS service
+
+
+#### Upstart (for Ubuntu 14.04)
+
+Create a configuration file `/etc/init/wordcount-service.conf` with the following content:
+
+```bash
+description "Word Count Web Service"
+
+# run processes on behalf of the bigdata user 
+setuid bigdata
+
+start on runlevel [2345]
+stop on runlevel [!2345]
+
+respawn
+respawn limit 10 5 # by default
+
+# command to execute
+exec /media/sf_Spark_Streaming/projects/webservice/service/WordCountService/target/wordcount-service-1.0.jar
+```
+
+Start the service using the `start` command: 
+
+`sudo service wordcount-service start | stop | restart`
+
+Check whether the service is running:
+
+`jps`
+
+```
+6948 wordcount-service-1.0.jar
+7117 Jps
+```
+
+You can find logs as follows:
+
+`sudo cat /var/log/upstart/wordcount-service.log`
+
+or
+
+`tail -n 100 /var/log/syslog`
+
+
+#### Systemd (for Ubuntu 16+)
+
+Create a configuration file `/etc/systemd/system/wordcount-service.service` with the following content:
+
+```ini
+[Unit]
+Description=Word Count Web Service
+After=syslog.target
+
+[Service]
+Type=simple
+User=bigdata
+ExecStart=/media/sf_Spark_Streaming/projects/webservice/service/WordCountService/target/wordcount-service-1.0.jar
+Restart=always
+RestartSec=4
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Start the service using the `start` command: 
+
+`sudo systemctl start | stop | restart wordcount-service`
+
+If you change a configuration file (`*.service`), you should reload the daemon:
+
+`sudo systemctl daemon-reload`
+
+And then restart your service:
+
+`sudo systemctl restart wordcount-service`
+
+Show runtime status information:
+
+`sudo systemctl status wordcount-service`
+
+You can find logs as follows:
+
+`journalctl --no-pager -u wordcount-service`
+
+or
+
+`tail -n 100 /var/log/syslog`
+
 ## Twitter API
 
 ![Service Architecture Diagram](img/web_service_twitter_diagram.png "Service Architecture")
@@ -362,6 +452,16 @@ To run locally use the command below:
 
 #### Launching Web Service
 
+Start/stop the web service as a managed process by command (see configuration above):
+
+`sudo service wordcount-service start | stop | restart` (for Ubuntu 14.04)
+
+or
+
+`sudo systemctl start | stop | restart wordcount-service` (for Ubuntu 16+)
+
+You can also run it as an unmanaged process as follows:
+
 `java -jar ./target/wordcount-service-1.0.jar`
 
 
@@ -383,7 +483,6 @@ To run locally use the command below:
 2019-11-19 13:37:08.349  INFO 9475 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2019-11-19 13:37:08.391  INFO 9475 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 42 ms
 ```
-
 
 To stop the running service, you can press `CTRL-C` or find its `PID` by the command:
 
