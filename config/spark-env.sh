@@ -41,7 +41,7 @@
 # - SPARK_DRIVER_MEMORY, Memory for Driver (e.g. 1000M, 2G) (Default: 1G)
 
 export SPARK_MASTER_HOST=localhost
-export SPARK_EXECUTOR_MEMORY=1G # overriden by spark-defaults.conf
+export SPARK_EXECUTOR_MEMORY=1G # will be overriden by spark-defaults.conf
 export PYSPARK_DRIVER_PYTHON=/opt/anaconda3/bin/python
 export PYSPARK_PYTHON=/opt/anaconda3/bin/python
 

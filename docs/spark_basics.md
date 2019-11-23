@@ -73,7 +73,7 @@ spark.eventLog.enabled	true
 spark.eventLog.dir file:///tmp/spark-events
 ```
 
-`slaves`
+`slaves` (for the standalone mode)
 
 ```
 localhost
