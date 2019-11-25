@@ -61,7 +61,8 @@ public class WordCountDriver {
 
     /**
      * Custom serializable class for json deserialization
-     *
+     * 
+     * Inspired by https://stackoverflow.com/a/56626264
      */
     public static final class ReviewConverterRDD implements Serializable {
 
