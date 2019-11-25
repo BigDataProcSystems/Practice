@@ -1,0 +1,10 @@
+.idea
+.ipynb_checkpoints
+.settings
+.project
+.classpath
+target
+*.class
+*.iml
+*.log
+*_debug.md
