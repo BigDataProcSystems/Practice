@@ -53,7 +53,7 @@ PATH=$SPARK_HOME/bin:$PATH
 
 ```
 export SPARK_MASTER_HOST=localhost
-export SPARK_EXECUTOR_MEMORY=1G # overriden by spark-defaults.conf
+export SPARK_EXECUTOR_MEMORY=1G # will be overriden by spark-defaults.conf
 export PYSPARK_DRIVER_PYTHON=/opt/anaconda3/bin/python
 export PYSPARK_PYTHON=/opt/anaconda3/bin/python
 
