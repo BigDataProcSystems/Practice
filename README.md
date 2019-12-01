@@ -38,6 +38,8 @@
 
 #### Dataframe
 
-- [Факторизация матрицы рейтингов и Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_Dataframe/blob/master/spark_df_movie_recommendation.ipynb)
-- [Boston House Price and Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_Dataframe/blob/master/spark_df_price_regression_cv.ipynb)
-- [Комбинация решающих деревьев и Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_Dataframe/blob/master/spark_df_purchase_tree.ipynb)
+- Recommendation Systems:
+    - [Факторизация матрицы рейтингов и Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_Dataframe/blob/master/notebooks/spark_df_movie_recommendation.ipynb)
+    - [Item-based collaborative filtering](https://github.com/BigDataProcSystems/Spark_ML_Dataframe/blob/master/lib/python/recommend/itemrecom.py) (python module)
+- [Boston House Price and Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_Dataframe/blob/master/notebooks/spark_df_price_regression_cv.ipynb)
+- [Комбинация решающих деревьев и Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_ML_Dataframe/blob/master/notebooks/spark_df_purchase_tree.ipynb)
