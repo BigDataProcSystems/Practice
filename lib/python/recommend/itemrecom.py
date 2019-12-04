@@ -45,10 +45,10 @@ class ItemBasedRecommend:
         Set of users  that contains df_train
 
     """
-    def __init__(self, spark, top_N_similarities=20, top_N_ratings=10):
+    def __init__(self, spark, top_N_similarities=20, top_N_ratings=None):
         self.spark = spark
         self.top_N_similarities = int(top_N_similarities)
-        self.top_N_ratings = int(top_N_ratings)
+        self.top_N_ratings = int(top_N_ratings) if top_N_ratings else None
 
     def train(self, df_train, top_N=None, user_column_name="user", item_column_name="item",
               rating_column_name="rating"):
@@ -141,7 +141,7 @@ class ItemBasedRecommend:
         """Predict rating for a given user and item"""
         raise Exception("Not implemented.")
     
-    def recommend(self, user_ids, top_N_ratings=None, partition_num=10, grouped=True):
+    def recommend(self, user_ids, top_N_ratings=None, partition_num=20, grouped=True):
         """
         Recommend top N items to given users.
 
@@ -173,19 +173,20 @@ class ItemBasedRecommend:
             raise Exception("It seems you haven't trained the model.")
 
         # Remove reference to the current class instance
-        _predict_per_partition = self._predict_per_partition
+        _predict_per_partition = ItemBasedRecommend._predict_per_partition
         br_similarity = self.br_similarity
         br_P = self.br_P
 
         # Predict ratings through the chain of transformations
         rdd_ratings_pred = self.df_train.where(F.col("user").isin(user_ids))\
-                .repartition(partition_num, F.col("user")).rdd\
-                .mapPartitions(_predict_per_partition(top_N_ratings, br_similarity, br_P, grouped))
+                .repartition(partition_num, F.col("user"))\
+                .sortWithinPartitions(F.col("user")).rdd\
+                .mapPartitions(_predict_per_partition(br_similarity, br_P, top_N_ratings, grouped))
         
         return rdd_ratings_pred if grouped else rdd_ratings_pred.toDF()
 
     @staticmethod
-    def _predict_per_partition(top_num_ratings, br_similarity, br_P, grouped):
+    def _predict_per_partition(br_similarity, br_P, top_N_ratings, grouped):
         """Wrapper for prediction of ratings per partition"""
 
         def _predict(p_i, PR_u):
@@ -233,7 +234,7 @@ class ItemBasedRecommend:
 
             Returns
             -------
-            DataFrame
+            RDD
             """
             prev_user = None
             curr_user = None
@@ -243,13 +244,13 @@ class ItemBasedRecommend:
                     PR_u[r["item"]] = r["rating"]
                 else:
                     if prev_user:
-                        yield prev_user, sorted(_predict_per_user(PR_u), key=lambda x: -x[1])[:top_num_ratings]
+                        yield prev_user, sorted(_predict_per_user(PR_u), key=lambda x: -x[1])[:top_N_ratings]
                     PR_u = dict()
                     PR_u[r["item"]] = r["rating"]
                     prev_user = curr_user
             # Emit values of the last user in the partition
             if curr_user and curr_user == prev_user:
-                yield prev_user, sorted(_predict_per_user(PR_u), key=lambda x: -x[1])[:top_num_ratings]
+                yield prev_user, sorted(_predict_per_user(PR_u), key=lambda x: -x[1])[:top_N_ratings]
 
         def _predict_per_partition_inner(ratings):
             """
@@ -267,14 +268,14 @@ class ItemBasedRecommend:
                     PR_u[r["item"]] = r["rating"]
                 else:
                     if prev_user:
-                        for el in sorted(_predict_per_user(PR_u), key=lambda x: -x[1])[:top_num_ratings]:
+                        for el in sorted(_predict_per_user(PR_u), key=lambda x: -x[1])[:top_N_ratings]:
                             yield Row(user=prev_user, item=el[0], rating_pred=el[1])
                     PR_u = dict()
                     PR_u[r["item"]] = r["rating"]
                     prev_user = curr_user
             # Emit values of the last user in the partition
             if curr_user and curr_user == prev_user:
-                for el in sorted(_predict_per_user(PR_u), key=lambda x: -x[1])[:top_num_ratings]:
+                for el in sorted(_predict_per_user(PR_u), key=lambda x: -x[1])[:top_N_ratings]:
                     yield Row(user=prev_user, item=el[0], rating_pred=el[1])
         
         if grouped:
