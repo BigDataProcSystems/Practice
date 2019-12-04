@@ -16,3 +16,6 @@ for input_line in sys.stdin:
     
         running_total = value
         last_key = this_key
+
+if last_key == this_key:
+    print("%s\t%i" % (last_key, running_total))
