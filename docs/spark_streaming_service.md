@@ -259,6 +259,11 @@ Start the service using the `start` command:
 
 `sudo service wordcount-service start | stop | restart`
 
+Show runtime status information:
+
+`sudo service wordcount-service status`
+
+
 Check whether the service is running:
 
 `jps`
@@ -442,7 +447,7 @@ Run the `Kafka` server:
 
 #### Submitting Spark Streaming Application
 
-Before we configured Spark to being run on `YARN`. So the following command runs a spark streaming application on `YARN` by default:
+Earlier we configured Spark to being run on `YARN`. So the following command runs a spark streaming application on `YARN` by default:
 
 `spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2 wordcount_streaming.py`
 
