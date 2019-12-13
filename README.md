@@ -1,1 +1,1 @@
-[Introduction to Graph Analysis with Spark GraphFrames](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Graphframes/notebooks/spark_gf_airplanes.ipynb)
+[Introduction to Graph Analysis with Spark GraphFrames](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Graphframes/blob/master/notebooks/spark_gf_airplanes.ipynb)
