@@ -37,7 +37,7 @@
 	</property>
 	<property>
 		<name>dfs.namenode.name.dir</name>
-		<value>/home/bigdata/tmp/hadoop/namenode</value>
+		<value>/home/ubuntu/BigData/tmp/hadoop/namenode</value>
 		<description>Determines where on the local filesystem the DFS name node
 		should store the name table(fsimage).  If this is a comma-delimited list
 		of directories then the name table is replicated in all of the
@@ -45,7 +45,7 @@
 	</property>
 	<property>
 		<name>dfs.datanode.data.dir</name>
-		<value>/home/bigdata/tmp/hadoop/datanode</value>
+		<value>/home/ubuntu/BigData/tmp/hadoop/datanode</value>
 		<description>Determines where on the local filesystem an DFS data node
 		should store its blocks.  If this is a comma-delimited
 		list of directories, then data will be stored in all named
@@ -58,7 +58,7 @@
 	</property>
 	<property>
 		<name>dfs.namenode.checkpoint.dir</name>
-		<value>/home/bigdata/tmp/hadoop/namesecondary</value>
+		<value>/home/ubuntu/BigData/tmp/hadoop/namesecondary</value>
 		<description>Determines where on the local filesystem the DFS secondary
 			name node should store the temporary images to merge.
 			If this is a comma-delimited list of directories then the image is

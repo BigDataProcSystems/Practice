@@ -23,7 +23,7 @@ fi
 
 
 # Hadoop configuration
-export HADOOP_HOME=/usr/lib/hadoop
+export HADOOP_HOME=$HOME/BigData/hadoop
 export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 
 PATH=$HADOOP_HOME/bin:$PATH

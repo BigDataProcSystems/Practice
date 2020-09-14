@@ -28,7 +28,7 @@ To get started, you need to have done the following:
 #### Hadoop directories:
 
 - `hadoop/bin` - hadoop commands
-- `hadoop/sbin/` - scripts
+- `hadoop/sbin` - scripts
 - `hadoop/etc/hadoop` - configuration
 - `hadoop/logs` - hadoop logs
 
@@ -38,9 +38,50 @@ To get started, you need to have done the following:
 - `hadoop/etc/hadoop/core-site.xml` ([default values](https://hadoop.apache.org/docs/r3.1.2/hadoop-project-dist/hadoop-common/core-default.xml))
 - `hadoop/etc/hadoop/hdfs-site.xml` ([default values](https://hadoop.apache.org/docs/r3.1.2/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml))
 
-#### Configure logs systems
+#### Configuring logs systems
 
-- `hadoop/logs/`
+- `hadoop/logs`
+
+#### Running HDFS
+
+Preparation:
+
+1) Create access keys and add the public one to `authorized_keys` to enable passwordless communication between `namenode` and `datanode`:
+
+`ssh-keygen -t rsa -P '' -f $HOME/.ssh/id_rsa && cat $HOME/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys`
+
+2) Create the namenode directory:
+
+`mkdir $HOME/BigData/tmp/hadoop/namenode`
+
+3) Format HDFS to first start:
+
+`hdfs namenode -format -force`
+
+To start/stop HDFS daemons separately, use the following commands:
+
+`hdfs --daemon start|stop namenode`
+
+`hdfs --daemon start|stop datanode`
+
+`hdfs --daemon start|stop secondarynamenode`
+
+Or you can run the script to start/stop all daemons at once:
+
+`$HADOOP_HOME/sbin/start-dfs.sh`
+
+`$HADOOP_HOME/sbin/stop-dfs.sh`
+
+Run the `jps` command to check whether the daemons are running:
+
+```
+7792 Jps
+7220 NameNode
+7389 DataNode
+7663 SecondaryNameNode
+```
+
+If something went wrong, look at `hadoop/logs` for more details.
 
 #### HDFS dashboard
 
@@ -80,10 +121,15 @@ Remove a directory recursively
 
 `hdfs dfs -rm -r /data`
 
+Read edit logs:
+
+`hdfs oev -i $EDIT_LOG_FILE -o $EDIT_LOG_FILE.xml`
+
+`cat $EDIT_LOG_FILE.xml`
 
 ## HDFS Java API
 
-### Create Java project in IntelliJ (v2019.2)
+### Create Java project in IntelliJ (v2019.2+)
 
 1) Open IntelliJ
 2) `Create New Project` on start or `File` -> `Project...`
@@ -93,15 +139,39 @@ Maven project
 
 3) Select Maven and project SDK 1.8 -> `Next`
 4) GroupId: `edu.classes.hdfs`; ArtifactId: `basic-hdfs-app` -> `Next`
-4) Project name: BasicHDFSApp -> `Finish`
+5) Project name: BasicHDFSApp -> `Finish`
 
 Project structure:
+
 ```
-App --> src --> main/
-    |       |
-    |       --> test/
-    |
-    --> pom.xml
+BasicHDFSApp
+├── out
+│   └── artifacts
+│       └── ReadFileApp
+│           └── ReadFileApp.jar
+├── pom.xml
+├── readwrite.log
+├── src
+│   ├── main
+│   │   ├── java
+│   │   │   ├── edu
+│   │   │   │   └── classes
+│   │   │   │       └── hdfs
+│   │   │   │           ├── BasicReadFile.java
+│   │   │   │           ├── BasicWriteFile.java
+│   │   │   │           ├── ReadWriteDriver.java
+│   │   │   │           └── ReadWriteFile.java
+│   │   │   └── META-INF
+│   │   │       └── MANIFEST.MF
+│   │   └── resources
+│   └── test
+│       └── java
+│           └── edu
+│               └── classes
+│                   └── hdfs
+│                       ├── BasicReadFileTest.java
+│                       └── BasicWriteFileTest.java
+
 ```
 
 #### Alternative way
