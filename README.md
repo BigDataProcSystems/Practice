@@ -13,6 +13,7 @@
 - [Introduction to Spark App](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_RDD/blob/master/spark_rdd_intro.ipynb)
 - [Introduction to PySpark RDD](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_RDD/blob/master/spark_rdd_basics.ipynb)
 - [Introduction to PySpark Dataframe](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Dataframe/blob/master/spark_df_basics.ipynb)
+- [Word Count of Review Text using Java Spark Application](docs/spark_wcount.md)
 - [PySpark and Jupyter](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_RDD/blob/master/spark_rdd_jupyter.ipynb)
 - [UDF in PySpark](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Dataframe/blob/master/spark_udf.ipynb)
 - [Spark and Jupyter with Livy as Spark REST Server](docs/spark_livy_jupyter.md)
