@@ -10,11 +10,10 @@ Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 - Configuration
 - Creating Java project in IntelliJ
 - Source Code
-- Running Spark with local files
+- Running Spark Application in IDE
 - Building `jar` file with `maven`
-- Running Spark `jar` file on:
-    - Local cluster
-    - YARN cluster
+- Running Spark Application using `spark-submit`
+- Running Spark Application on YARN
 - References
 
 
@@ -190,7 +189,7 @@ sc.textFile(args[0])
     .saveAsTextFile(args[1])
 ```
 
-## Running application with local files
+## Running Spark Application in IDE
 
 1) `Run` -> `Edit Configurations...`
 2) `Add new configuration...` for Application -> Name: `wordcount`
@@ -241,10 +240,7 @@ target
 
 You can build a `jar` file as an artifact as described [here](mapreduce_scala.md).
 
-## Running Spark `jar` file
-
-### Local cluster
-
+## Running Spark Application using `spark-submit`
 
 Change a working directory:
 ```
@@ -272,7 +268,7 @@ The output directory has the following structure:
 ```
 
 
-### YARN cluster
+## Running Spark Application on YARN
 
 #### Starting Hadoop cluster
 

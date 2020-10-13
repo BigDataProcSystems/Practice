@@ -11,8 +11,9 @@ Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 - Installing `Python` plugin for `IntelliJ`
 - Creating `Python` project
 - Source code
-- Running with local files
-- Running `python` app on YARN cluster
+- Running Spark Application in IDE
+- Running Spark Application using `spark-submit`
+- Running Spark Application on YARN
 - References
 
 ## Prerequisites
@@ -148,7 +149,7 @@ def main(input_file, output_path):
 
 3. Test class: `TODO`
 
-## Running Spark Application with Local Files
+## Running Spark Application in IDE
 
 Add the Spark modules:
 
@@ -208,12 +209,9 @@ First few rows from `part-00000`:
 0594481813	4.0
 ```
 
-## Running Spark Application on Cluster
-
-### Local cluster (with local files)
+## Running Spark Application using `spark-submit`
 
 Note: You can use HDFS as well
-
 
 Run the spark application:
 
@@ -239,9 +237,7 @@ of	127
 for	113
 ```
 
-
-
-### YARN cluster
+## Running Spark Application on YARN
 
 #### Starting Hadoop cluster
 
