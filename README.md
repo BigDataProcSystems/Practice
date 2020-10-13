@@ -15,7 +15,7 @@
 - [Introduction to PySpark Dataframe API](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Dataframe/blob/master/spark_df_basics.ipynb)
 - Spark and Processing Customer Reviews:
     - Part 1. Interactive shell with Jupyter ([Python](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_RDD/blob/master/spark_rdd_reviews.ipynb))
-    - Part 2. Self-Contained Application ([Java](docs/spark_wcount.md) | [Python](docs/spark_wcount_py.md))
+    - Part 2. Self-Contained Application ([Java](docs/spark_reviews.md) | [Python](docs/spark_reviews_py.md))
 - [DEPRECATED] [PySpark and Jupyter](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_RDD/blob/master/spark_rdd_jupyter.ipynb)
 - [UDF in PySpark](https://nbviewer.jupyter.org/github/BigDataProcSystems/Spark_Dataframe/blob/master/spark_udf.ipynb)
 - [Spark and Jupyter with Livy as Spark REST Server](docs/spark_livy_jupyter.md)
