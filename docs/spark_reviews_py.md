@@ -42,7 +42,7 @@ To get started, you need to have done the following:
 
 ## Source Code
 
-1. [Word Count for Review Text]()
+1. [Word Count for Review Text](https://github.com/BigDataProcSystems/Spark_RDD/blob/master/code/python/reviewsparkapp/wcount_reviews.py)
 
 Code Snippet
 
@@ -94,7 +94,7 @@ def main(input_file, output_path):
 ...
 ```
 
-2. [Average Product Rating]()
+2. [Average Product Rating](https://github.com/BigDataProcSystems/Spark_RDD/blob/master/code/python/reviewsparkapp/avgratings_reviews.py)
 
 Code Snippet
 
