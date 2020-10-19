@@ -7,21 +7,21 @@ from kafka import KafkaProducer
 
 """
 
-    KAFKA PRODUCER INIT
-
+KAFKA PRODUCER INIT
 
 """
+
 
 producer = KafkaProducer(bootstrap_servers="localhost:9092")
-topic_name = "wordcount"
+topic_name = "tweets-kafka"
 
 
 """
 
-    TWITTER API AUTHENTICATION
-
+TWITTER API AUTHENTICATION
 
 """
+
 
 consumer_token = "YOUR_CONSUMER_TOKEN"
 consumer_secret = "YOUR_CONSUMER_SECRET"
@@ -36,39 +36,41 @@ api = tweepy.API(auth)
 
 """
 
-    LISTENER FOR MESSAGES FROM TWITTER
-
+LISTENER TO MESSAGES FROM TWITTER
 
 """
 
 
 class MoscowStreamListener(tweepy.StreamListener):
-    
+    """
+    Listener Class of Twitter API Stream.
+    """
+
     def on_data(self, raw_data):
+        """Receiving a new data."""
 
         data = json.loads(raw_data)
 
         if "extended_tweet" in data:
             text = data["extended_tweet"]["full_text"]
-            
+
             # print(text)
-            
+
             # put message into Kafka
             producer.send(topic_name, text.encode("utf-8"))
         else:
             if "text" in data:
                 text = data["text"].lower()
-                
+
                 # print(data["text"])
-                
+
                 # put message into Kafka
                 producer.send(topic_name, data["text"].encode("utf-8"))
 
 
 """
 
-    RUN PROCESSING
-
+RUN PROCESSING
 
 """
 

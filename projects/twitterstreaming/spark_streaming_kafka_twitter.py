@@ -5,17 +5,24 @@ from pyspark.streaming import StreamingContext
 from pyspark.streaming.kafka import KafkaUtils
 
 
-SPARK_APP_NAME = "KafkaTwitterWordCount"
+SPARK_APP_NAME = "WordCountKafkaTwitter"
 SPARK_CHECKPOINT_TMP_DIR = "tmp_spark_streaming"
 SPARK_BATCH_INTERVAL = 10
 SPARK_LOG_LEVEL = "OFF"
 
 KAFKA_BOOTSTRAP_SERVERS = "localhost:9092"
-KAFKA_TOPIC = "wordcount"
+KAFKA_TOPIC = "tweets-kafka"
 
 
 # Update word count
 def update_total_count(current_count, count_state):
+    """
+    Update the previous value by a new ones.
+
+    Each key is updated by applying the given function 
+    on the previous state of the key (count_state) and the new values 
+    for the key (current_count).
+    """
     if count_state is None:
         count_state = 0
     return sum(current_count, count_state)
