@@ -6,10 +6,10 @@ from time import sleep
 import click
 
 
-HOST = "localhost"
-PORT = 9999
-DELAY = 4
-WAIT_FOR_CONNECTION = 10
+SERVER_HOST = "localhost"
+SERVER_PORT = 9999
+SERVER_WAIT_FOR_CONNECTION = 10
+MESSAGE_DELAY = 4
 
 
 def get_file_line(file_path):
@@ -23,10 +23,10 @@ def get_file_line(file_path):
 
 
 @click.command()
-@click.option('--host', default=HOST, help="Server host.")
-@click.option('--port', default=PORT, help="Server port.")
-@click.option('--file', help="File to send.")
-@click.option('--delay', default=DELAY, help="Sending delay.")
+@click.option("-h", "--host", default=SERVER_HOST, help="Server host.")
+@click.option("-p", "--port", default=SERVER_PORT, help="Server port.")
+@click.option("-f", "--file", help="File to send.")
+@click.option("-d", "--delay", default=MESSAGE_DELAY, help="Delay between messages.")
 def main(host, port, file, delay):
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
@@ -42,7 +42,7 @@ def main(host, port, file, delay):
         while True:
             client_socket = None
             try:
-                server_socket.settimeout(WAIT_FOR_CONNECTION)
+                server_socket.settimeout(SERVER_WAIT_FOR_CONNECTION)
                 print("Waiting for client connection...")
                 client_socket, client_address = server_socket.accept()
                 server_socket.settimeout(None)
