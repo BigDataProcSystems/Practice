@@ -95,10 +95,10 @@ Start the `kafka` server:
 
 ## Creating topic
 
-`$KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper localhost:2181 --topic wordcount --partitions 1 --replication-factor 1`
+`$KAFKA_HOME/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic word-count`
 
 ```
-Created topic wordcount.
+Created topic word-count.
 ```
 
 `sudo $ZOOKEEPER_HOME/bin/zkCli.sh`
@@ -133,11 +133,11 @@ numChildren = 0
 
 Open a new terminal window and run the following command to start the `Kafka` Console Consumer:
 
-`$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic wordcount --from-beginning`
+`$KAFKA_HOME/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic word-count --from-beginning`
 
 In another terminal window run the `Kafka` Console Producer:
 
-`$KAFKA_HOME/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic wordcount`
+`$KAFKA_HOME/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic word-count`
 
 Enter some text in the producer console, and apply it. In the Consumer console you should see the text that you applied in the producer:
 
