@@ -10,7 +10,7 @@ SPARK_BATCH_INTERVAL = 10
 SPARK_LOG_LEVEL = "OFF"
 
 KAFKA_BOOTSTRAP_SERVERS = "localhost:9092"
-KAFKA_TOPIC = "word-count"
+KAFKA_TOPIC = "kafka-word-count"
 
 
 def update_total_count(current_count, count_state):
