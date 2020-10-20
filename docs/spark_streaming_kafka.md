@@ -39,7 +39,7 @@ Run a Kafka consumer:
 
 ## Spark Streaming Application
 
-Spark Streaming application code ([spark_streaming_kafka_wcount.py](../projects/kakfastreaming/spark_streaming_kafka_wcount.py)
+Spark Streaming application code ([spark_streaming_kafka_wcount.py](../projects/kakfastreaming/spark_streaming_kafka_wcount.py))
 
 ```python
 # -*- coding: utf-8 -*-
