@@ -67,6 +67,8 @@ data_test[["message"]].to_csv(os.path.join(BASE_DATA_DIR, "smstest"), sep="\t", 
 
 Source code: [spam_classification.py](../projects/spamstreaming/spam_classification.py)
 
+Note: This is not an optimized implementation of the classification model, for demonstration purposes only.
+
 ```python
 ...
 
@@ -109,7 +111,6 @@ def main(input, output):
 ## Classification in Stream
 
 Source code: [spark_streaming_spam.py](../projects/spamstreaming/spark_streaming_spam.py)
-
 
 ```python
 ...
