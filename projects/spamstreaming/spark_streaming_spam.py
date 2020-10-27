@@ -16,7 +16,7 @@ SPARK_BATCH_INTERVAL = 10
 SPARK_LOG_LEVEL = "OFF"
 
 MODEL_SPAM_PATH = "models/spammodel.pickle"
-MODEL_BINARIZER_PATH = "models/tfmodel.pickle"
+MODEL_BINARIZER_PATH = "models/vecmodel.pickle"
 
 
 def load_spam_model(model_path=MODEL_SPAM_PATH):
@@ -73,7 +73,7 @@ def format_output(record):
 
 @click.command()
 @click.option("-s", "--classifier", default=MODEL_SPAM_PATH, help="Model for classification.")
-@click.option("-v", "--vectorizer", default=MODEL_BINARIZER_PATH, help="Model for text transforming into vector.")
+@click.option("-v", "--vectorizer", default=MODEL_BINARIZER_PATH, help="Model for text vectorization.")
 def main(vectorizer, classifier):
 
     # Create Spark Context
@@ -111,7 +111,7 @@ def main(vectorizer, classifier):
     # Print the result (10 records) in terminal
     output.pprint()
 
-    # If you want to save the result in local files
+    # If you want to save the result in file systems
     # output.transform(lambda rdd: rdd.coalesce(1)).saveAsTextFiles("FILE_PATH")
 
     # Start Spark Streaming
