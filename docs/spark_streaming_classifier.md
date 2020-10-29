@@ -5,6 +5,7 @@ Sergei Yu. Papulin (papulin.study@yandex.ru)
 ## Contents
 
 - Prerequisites
+- Architecture
 - Spark configuration
 - Datasets
 - Source Code
@@ -25,6 +26,16 @@ To get started, you need to have done the following:
 - Install Spark 2+
 - Install IntelliJ 2019+ with Python Plugin or PyCharm 2019+
 
+
+## Architecture
+
+<center>
+
+![Service Architecture Diagram](img/spark_streaming_classifier.png "Service Architecture")
+
+<i>Figure 1. System architecture</i>
+
+</center>
 
 ## [Optional] Spark configuration
 
