@@ -44,3 +44,5 @@ Some examples below require the `Kafka` server as a message broker, so follow [t
 
 [Spam Classification using Sklearn and Spark Streaming](https://github.com/BigDataProcSystems/Spark_Streaming/blob/master/docs/spark_streaming_classifier.md): Using spam classification model built with `sklearn` library in Spark Streaming application
 
+[Updatable Broadcast in Spark Streaming Application](https://github.com/BigDataProcSystems/Spark_Streaming/blob/master/docs/spark_streaming_update.md): How to use ML models that change periodically in Spark Streaming applications 
+
