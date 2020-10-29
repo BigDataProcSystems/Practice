@@ -12,6 +12,17 @@ Sergei Yu. Papulin (papulin.study@yandex.ru)
 - Run and Test
 - References
 
+## Architecture
+
+
+<center>
+
+![Service Architecture Diagram](img/spark_streaming_kafka_tweets.png "Service Architecture")
+
+<i>Figure 1. System architecture</i>
+
+</center>
+
 ## Spark configuration
 
 In this tutorial the default configuration involves deploying Spark on `YARN` cluster. So you should configure, and run `HDFS` and `YARN`.
