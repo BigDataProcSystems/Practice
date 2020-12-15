@@ -27,8 +27,14 @@
 
 #### Practice:
 
+
+DStreams (RDD API):
 - [Introduction to Spark Streaming](docs/spark_streaming.md)
 - [Web Service with Spark Streaming and Kafka](docs/spark_streaming_service.md)
+
+
+Structured Streaming (DataFrame API):
+- [Window with Append Output Mode](https://github.com/BigDataProcSystems/Spark_Streaming/blob/master/docs/spark_streaming_structured_window_append.md)
 
 ### Spark MLlib
 
