@@ -46,7 +46,7 @@ def random_output(delay):
 
 
 for i in range(repeat):
-        send_messages(init_iterator(output, delay, file), client_socket.send)
+    send_messages(init_iterator(output, delay, file), client_socket.send)
 ```
 
 ## Spark Structured Streaming Application
