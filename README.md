@@ -34,6 +34,7 @@ DStreams (RDD API):
 
 
 Structured Streaming (DataFrame API):
+- [Complete and Update Output Modes](https://github.com/BigDataProcSystems/Spark_Streaming/blob/master/docs/spark_streaming_structured_output_modes.md)
 - [Window with Append Output Mode](https://github.com/BigDataProcSystems/Spark_Streaming/blob/master/docs/spark_streaming_structured_window_append.md)
 
 ### Spark MLlib
