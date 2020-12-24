@@ -40,6 +40,20 @@ def text_file_output(file_path, delay):
             sleep(delay)
 
 
+def random_json_with_timestamp(delay, random_timestamp=False, timestamp_delay=60):
+    import random
+    import datetime
+    import json
+    for i in range(1000):
+        timestamp = datetime.datetime.today() if not random_timestamp \
+            else datetime.datetime.today() - datetime.timedelta(seconds=random.randint(0, timestamp_delay))
+        yield json.dumps({
+            "number": random.randint(0, 10),
+            "timestamp": timestamp.isoformat()
+        })
+        sleep(delay)
+
+
 def init_iterator(output, delay, file):
 
     if output == "random":
@@ -51,6 +65,8 @@ def init_iterator(output, delay, file):
             return text_file_output(file, delay)
         else:
             raise Exception("File path was not provided.")
+    elif output == "json_random_timestamp":
+        return random_json_with_timestamp(delay, random_timestamp=True)
     else:
         raise Exception("Unsupported output type.")
 
