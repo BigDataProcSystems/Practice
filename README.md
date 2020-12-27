@@ -23,7 +23,7 @@
 #### Lectures:
 
 - [Spark Streaming](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Spark_Streaming.pdf)
-- Spark Structured Streaming
+- [Spark Structured Streaming](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Spark_Streaming_Structured.pdf)
 
 #### Practice:
 
@@ -49,8 +49,8 @@ Structured Streaming (DataFrame API):
 
 #### Lectures:
 
-- Linear Regression With SGD
-- Naive Bayes Classification
+- [Linear Regression With SGD](https://github.com/BigDataProcSystems/Lectures/blob/master/Spark_MLlib_Distributed_SGD.pdf)
+- [Naive Bayes Classification](https://github.com/BigDataProcSystems/Lectures/blob/master/Spark_MLlib_NaiveBayes.pdf)
 - [Recommendation System using ALS](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_ML_RecomSystems.pdf)
 
 #### Practice:
