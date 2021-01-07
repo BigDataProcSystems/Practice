@@ -94,6 +94,10 @@ DataFrame API:
 
 ## Spark on Kubernetes
 
+#### Lectures:
+
+- [Spark on Kubernetes](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Spark_K8s.pdf) 
+
 #### Practice:
 
 - [Spark Standalone Cluster on Kubernetes using Deployments](https://github.com/BigDataProcSystems/Docker/blob/master/docs/spark_k8s_deployment.md)
