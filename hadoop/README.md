@@ -34,12 +34,12 @@
 
 ## Archive
 
-Branch: [2018](https://github.com/BigDataProcSystems/Hadoop/tree/2018)
+Branch: [2018](https://github.com/BigDataProcSystems/Practice/tree/hadoop_2018)
 
 General
-- [Introduction to HDFS](https://nbviewer.jupyter.org/github/BigDataProcSystems/Hadoop/blob/2018/hdfs_basics.ipynb)
-- [Introduction to MapReduce](https://nbviewer.jupyter.org/github/BigDataProcSystems/Hadoop/blob/2018/mapreduce_basics.ipynb)
-- [MapReduce Workflow (JobControl and Oozie)](https://nbviewer.jupyter.org/github/BigDataProcSystems/Hadoop/blob/2018/mapreduce_job_flow.ipynb)
+- [Introduction to HDFS](https://nbviewer.jupyter.org/github/BigDataProcSystems/Practice/blob/hadoop_2018/hadoop/notebooks/hdfs_basics.ipynb)
+- [Introduction to MapReduce](https://nbviewer.jupyter.org/github/BigDataProcSystems/Practice/blob/hadoop_2018/hadoop/notebooks/mapreduce_basics.ipynb)
+- [MapReduce Workflow (JobControl and Oozie)](https://nbviewer.jupyter.org/github/BigDataProcSystems/Practice/blob/hadoop_2018/hadoop/notebooks/mapreduce_job_flow.ipynb)
 
 Cloudera
 - [Hadoop Configuration](https://nbviewer.jupyter.org/github/BigDataProcSystems/HOWTO_Cloudera/blob/master/config_hadoop.ipynb)
