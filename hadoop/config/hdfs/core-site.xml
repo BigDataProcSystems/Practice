@@ -28,7 +28,7 @@
     </property>
     <property>
         <name>hadoop.tmp.dir</name>
-        <value>/home/ubuntu/BigData/tmp/hadoop-bigdata</value>
+        <value>/home/ubuntu/BigData/tmp/hadoop</value>
         <description>A base for other temporary directories.</description>
     </property>
 </configuration>
