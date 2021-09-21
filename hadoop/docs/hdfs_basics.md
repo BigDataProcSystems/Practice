@@ -23,6 +23,8 @@ To get started, you need to have done the following:
 - Download Hadoop 3+
 - Install IntelliJ 2019+ (for Java code)
 
+BigData Image for VirtualBox you can find [here](https://disk.yandex.ru/d/0Hd92rzNB0_IHg).
+
 ## Configuration
 
 #### Hadoop directories:
@@ -38,9 +40,8 @@ To get started, you need to have done the following:
 - `hadoop/etc/hadoop/core-site.xml` ([default values](https://hadoop.apache.org/docs/r3.1.2/hadoop-project-dist/hadoop-common/core-default.xml))
 - `hadoop/etc/hadoop/hdfs-site.xml` ([default values](https://hadoop.apache.org/docs/r3.1.2/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml))
 
-#### Configuring logs systems
+You can find all configuration files that you should apply by following the link: [configuration files](../config/hdfs).
 
-- `hadoop/logs`
 
 #### Running HDFS
 
@@ -52,7 +53,7 @@ Preparation:
 
 2) Create the namenode directory:
 
-`mkdir $HOME/BigData/tmp/hadoop/namenode`
+`mkdir -p $HOME/BigData/tmp/hadoop/namenode`
 
 3) Format HDFS to first start:
 
@@ -93,6 +94,14 @@ If something went wrong, look at `hadoop/logs` for more details.
 
 - [File System Shell Guide](https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-common/FileSystemShell.html)
 
+Display basic filesystem information and statistics
+
+`hdfs dfsadmin -report`
+
+Show HDFS topology
+
+`hdfs dfsadmin -printTopology`
+
 Create a directory
 
 `hdfs dfs -mkdir /data`
@@ -105,21 +114,13 @@ Change file permissions
 
 `hdfs dfs -chmod 600 /data/file`
 
-Display basic filesystem information and statistics
-
-`hdfs dfsadmin -report`
-
-Show HDFS topology
-
-`hdfs dfsadmin -printTopology`
-
 Print out locations for every block
 
 `hdfs fsck /myfile.txt -files -blocks -locations`
 
 Remove a directory recursively
 
-`hdfs dfs -rm -r /data`
+`hdfs dfs -rm -R /data`
 
 Read edit logs:
 
@@ -173,6 +174,8 @@ BasicHDFSApp
 │                       └── BasicWriteFileTest.java
 
 ```
+
+The source code is [here](../projects/java/BasicHDFSApp).
 
 #### Alternative way
 Common Java project
@@ -239,7 +242,7 @@ hadoop jar ReadFileApp.jar edu.classes.hdfs.BasicReadFile hdfs://localhost:9000/
 
 See
 
-- Coming soon
+- [Deploying on Docker](https://github.com/BigDataProcSystems/Docker/blob/master/docs/hadoop_docker_part_1.md)
 
 ## Running on AWS using Cloudera
 
