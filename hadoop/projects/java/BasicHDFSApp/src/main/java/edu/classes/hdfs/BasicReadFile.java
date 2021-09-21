@@ -35,7 +35,7 @@ public class BasicReadFile {
         // Initialize configuration instance
         Configuration conf = new Configuration();
 
-        // Set system system as destination
+        // Set system as destination
         conf.setStrings("fs.default.name", "hdfs://localhost:9000");
 
         // Receive a filesystem instance
