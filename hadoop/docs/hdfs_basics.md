@@ -25,6 +25,15 @@ To get started, you need to have done the following:
 
 BigData Image for VirtualBox you can find [here](https://disk.yandex.ru/d/0Hd92rzNB0_IHg).
 
+## Objectives
+
+By the end of this guide you will be able to:
+- manage HDFS daemons
+- change HDFS configuration
+- use HDFS CLI
+- run JAVA projects for manipulating files in HDFS
+
+
 ## Configuration
 
 #### Hadoop directories:
@@ -41,7 +50,6 @@ BigData Image for VirtualBox you can find [here](https://disk.yandex.ru/d/0Hd92r
 - `hadoop/etc/hadoop/hdfs-site.xml` ([default values](https://hadoop.apache.org/docs/r3.1.2/hadoop-project-dist/hadoop-hdfs/hdfs-default.xml))
 
 You can find all configuration files that you should apply by following the link: [configuration files](../config/hdfs).
-
 
 #### Running HDFS
 
