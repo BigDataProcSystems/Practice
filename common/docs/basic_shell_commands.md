@@ -1,7 +1,7 @@
 # Основные команды в Ubuntu
 Сергей Папулин (papulin_bmstu@mail.ru)
 
-Содержание
+### Содержание
 
 - [Образ Ubuntu](#Образ-Ubuntu)
 - [Файловая система](#Файловая-система)
@@ -56,10 +56,30 @@
 sudo adduser $USER vboxsf
 ```
 
-## Справка
+## Полезно знать
+
+Открытие терминала
+
+`Ctrl+Alt+t`
+
+Автозаполнение в терминале
+
+`Tab`
+
+Поиск по истории команд в терминале
+
+`Ctrl+r`
+
+Справка по командам
 
 ```bash
 man ls
+```
+
+Очистка отображаемых данных в терминале
+
+```bash
+clear
 ```
 
 ## Файловая система
@@ -570,9 +590,10 @@ sudo apt update
 
 Установка пакетов
 
+```bash
+sudo apt install $PACKAGE_NAME
 ```
-sudo apt install tree 
-```
+
 
 ```bash
 sudo apt install ${FILE.deb}
@@ -596,14 +617,14 @@ dpkg --list
 
 Удаление пакета
 
-```
-sudo apt remove tree 
+```bash
+sudo apt remove $PACKAGE_NAME 
 ```
 
 Удаление пакета со всеми конфигурационными файлами
 
-```
-sudo apt purge tree 
+```bash
+sudo apt purge $PACKAGE_NAME
 ```
 
 Очистка кэша локального репозитория от ранее полученных файлов (`/var/cache/apt/archives/`)
