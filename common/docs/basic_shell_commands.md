@@ -11,10 +11,29 @@
     - [Права доступа](#Права-доступа)
     - [Монтирование устройства хранения данных](#Монтирование-устройства-хранения-данных)
 - [Процессы](#Процессы)
-- [Менеджер пакетов](#Менеджер-пакетов)
-- [Загрузка файлов](#Загрузка-файлов)
+- [Менеджер пакетов `apt`](#Менеджер-пакетов-apt)
+- [Загрузка файлов посредством `wget`](#Загрузка-файлов-посредством-wget)
 - [Архиватор](#Архиватор)
+    - [`tar`](#tar)
+    - [`zip`/`unzip`](#zip/unzip)
 - [Управление сетью](#Управление-сетью)
+    - [Настройка сети посредством `netplan`](#Настройка-сети-посредством-netplan)
+    - [Отслеживание состояния сети](#Отслеживание-состояния-сети)
+        - [`ip addr`](#ip-addr)
+        - [`ip link`](#ip-link)
+        - [`ip neighbor`](#ip-neighbor)
+        - [`ip route`](#ip-route)
+    - [Контроль трафика](#Контроль-трафика)
+        - [`iptables`](#iptables)
+        - [`ufw`](#ufw)
+    - [Мониторинг соединений](#Мониторинг-соединений)
+        - [`ss`](#ss)
+        - [`lsof`](#lsof)
+        - [`nc`](#nc)
+    - [Удаленный доступ](#Удаленный-доступ)
+        - [`ssh`](#ssh)
+        - [`scp`](#scp)
+
 
 ## Образ Ubuntu
 
@@ -216,7 +235,7 @@ ln -s welcome_1.0.md welcome.md
 cat welcome.md
 ls -l
 
-# замена файла
+# замена ссылки на файл
 echo "Hello World 1.1" >> welcome_1.1.md
 ln -sfn welcome_1.1.md welcome.md
 cat welcome.md
@@ -501,6 +520,13 @@ sudo umount /media/pendrive
 
 ## Процессы
 
+Отслеживание выполнения процессов и потребляемых ими ресурсов
+
+```
+top
+```
+
+
 Список процессов
 
 ```
@@ -534,7 +560,7 @@ sudo ls /proc
 sudo kill $PID
 ```
 
-## Менеджер пакетов
+## Менеджер пакетов `apt`
 
 Получение обновленной актуальной информации о пакетах в репозиториях
 
@@ -605,7 +631,7 @@ sudo apt autoremove
 ```
 
 
-## Загрузка файлов
+## Загрузка файлов посредством `wget`
 
 ```
 wget -P ~/Downloads https://mail.ru 
@@ -618,14 +644,12 @@ cat ~/Downloads/index.html | less
 
 ## Архиватор
 
+### `tar`
+
 Создание архива
 
 ```bash
 tar -cvJ -f ${ARCHIVE.tar.xz} $SOURCE
-```
-
-```bash
-zip ${ARCHIVE.zip} -r $SOURCE
 ```
 
 Распаковка архива
@@ -634,15 +658,24 @@ zip ${ARCHIVE.zip} -r $SOURCE
 tar -xv -f ${ARCHIVE.tar.xz} --directory $DESTINATION --strip-components 1
 ```
 
+### `zip`/`unzip`
+
+Создание архива
+
+```bash
+zip ${ARCHIVE.zip} -r $SOURCE
+```
+
+Распаковка архива
+
 ```bash
 unzip ${PATH_TO_ZIP.zip} -d $DESTINATION
 ```
 
 
-
 ## Управление сетью
 
-### Настройка сети
+### Настройка сети посредством `netplan`
 
 ```bash
 cat /etc/network/interfaces
@@ -680,7 +713,9 @@ cat /var/lib/NetworkManager/${DHCP_CLIENT.lease}
 # TODO: change dns server
 ```
 
-### 
+### Отслеживание состояния сети
+
+#### `ip addr`
 
 IP адреса по всем интерфейсам
 
@@ -693,6 +728,8 @@ IP адрес на интерфейсе `eth0`
 ```bash
 ip addr show eth0
 ```
+
+#### `ip link`
 
 Интерфейсы (MAC адреса)
 
@@ -710,11 +747,16 @@ sudo ip link set eth0 down
 sudo ip link set eth0 up
 ```
 
+#### `ip neighbour`
+
+
 ARP таблица
 
 ```
 ip neighbour
 ```
+
+#### `ip route`
 
 Таблица маршрутизации
 
@@ -722,36 +764,9 @@ ip neighbour
 ip route
 ```
 
-Отображение информации о сокетах
+### Контроль трафика
 
-```
-sudo ss -tuan
-```
-- `a` - все сокеты
-- `l` - только сокеты в состоянии прослушивания (listening)
-- `t` - tcp
-- `u` - udp
-- `n` - числовые значения хостов и портов
-- `p` - показывать процессы
-- `e` - подробная информация по сокетам
-
-```
-sudo ss -tuln
-```
-
-IP соединения
-
-```
-sudo lsof -i -P -n
-```
-
-```
-sudo ss -tulnp
-```
-
-### Управление трафиком
-
-#### Утилита `iptables`
+#### `iptables`
 
 Перенаправление запроса
 
@@ -771,14 +786,67 @@ sudo iptables -t nat -L OUTPUT -n
 sudo iptables  -t nat -D OUTPUT 1
 ```
 
-#### Утилита `ufw`
+#### `ufw`
 
 
 ```bash
 # TODO: ufw
 ```
 
-### SSH соединение
+### Мониторинг соединений
+
+#### `ss`
+
+Отображение информации о сокетах
+
+```
+sudo ss -tuan
+```
+- `a` - все сокеты
+- `l` - только сокеты в состоянии прослушивания (listening)
+- `t` - tcp
+- `u` - udp
+- `n` - числовые значения хостов и портов
+- `p` - показывать процессы
+- `e` - подробная информация по сокетам
+
+```
+sudo ss -tuln
+```
+
+#### `lsof`
+
+IP соединения
+
+```
+sudo lsof -i -P -n
+```
+
+```
+sudo ss -tulnp
+```
+
+#### `nc`
+
+```bash
+nc -zv localhost 1-1000
+```
+
+```bash
+nc -zv localhost 22
+```
+
+```bash
+nc -l -p 23
+```
+
+```bash
+nc localhost 23
+```
+
+### Удаленный доступ
+
+#### `ssh`
 
 ```
 ssh USERNAME@HOST -p 22
@@ -796,6 +864,7 @@ ssh-copy-id -i $HOME/.ssh/id_rsa_alex.pub USERNAME@HOST
 ssh -i ~/.ssh/id_rsa USERNAME@HOST
 ```
 
+#### `scp`
 
 Копирование файла на удаленный узел
 
@@ -815,21 +884,4 @@ scp -i $HOME/.ssh/id_rsa_alex USERNAME@HOST:$FILE $LOCAL_DIR
 scp -r -i $HOME/.ssh/id_rsa_alex $LOCAL_DIR USERNAME@HOST:$REMOTE_DIR
 ```
 
-### Управление TCP и UDP соединениями
-
-```bash
-nc -zv localhost 1-1000
-```
-
-```bash
-nc -zv localhost 22
-```
-
-```bash
-nc -l -p 23
-```
-
-```bash
-nc localhost 23
-```
 
