@@ -44,7 +44,7 @@ Precedence rules:
 - `yarn-env.sh` > `hadoop-env.sh` > hard-coded defaults
 - `YARN_xyz` > `HADOOP_xyz` > hard-coded defaults
 
-The configuration files you can find [here](/config/) 
+The configuration files you can find [here](../config/yarn).
 
 ### Memory allocation and vcores
 
