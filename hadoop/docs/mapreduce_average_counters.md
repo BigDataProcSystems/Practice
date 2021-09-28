@@ -38,13 +38,13 @@ See [Introduction to MapReduce](mapreduce_basics.md)
 
 ## Source code in Java
 
-1. [pom.xml](/code_java/AverageRatingApp/pom.xml)
-2. [Review model class](/code_java/AverageRatingApp/src/main/java/edu/classes/mr/Review.java)
-3. [Custom writable class](/code_java/AverageRatingApp/src/main/java/edu/classes/mr/StatsTupleWritable.java)
-4. [Enum for json parsing result](/code_java/AverageRatingApp/src/main/java/edu/classes/mr/ReviewState.java)
-5. [Driver class](/code_java/AverageRatingApp/src/main/java/edu/classes/mr/AvgRatingDriver.java)
-6. [Mapper class](/code_java/AverageRatingApp/src/main/java/edu/classes/mr/AvgRatingMapper.java)
-7. [Reducer class](/code_java/AverageRatingApp/src/main/java/edu/classes/mr/AvgRatingReducer.java)
+1. [pom.xml](../projects/java/AverageRatingApp/pom.xml)
+2. [Review model class](../projects/java//AverageRatingApp/src/main/java/edu/classes/mr/Review.java)
+3. [Custom writable class](../projects/java/AverageRatingApp/src/main/java/edu/classes/mr/StatsTupleWritable.java)
+4. [Enum for json parsing result](../projects/java/AverageRatingApp/src/main/java/edu/classes/mr/ReviewState.java)
+5. [Driver class](../projects/java/AverageRatingApp/src/main/java/edu/classes/mr/AvgRatingDriver.java)
+6. [Mapper class](../projects/java/AverageRatingApp/src/main/java/edu/classes/mr/AvgRatingMapper.java)
+7. [Reducer class](../projects/java/AverageRatingApp/src/main/java/edu/classes/mr/AvgRatingReducer.java)
 8. Test class: `TODO`
 
 ## Running MapReduce with local files
