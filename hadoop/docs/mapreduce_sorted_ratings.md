@@ -33,13 +33,13 @@ See [Introduction to MapReduce](mapreduce_basics.md)
 
 ## Source code in Java
 
-1. [pom.xml](/code_java/SortedRatingApp/pom.xml)
-2. [Review model class](/code_java/SortedRatingApp/src/main/java/edu/classes/mr/Review.java)
-3. [Custom writable class](/code_java/SortedRatingApp/src/main/java/edu/classes/mr/RatingKeyWritable.java)
-4. [Enum for json parsing result](/code_java/SortedRatingApp/src/main/java/edu/classes/mr/ReviewState.java)
-5. [Driver class](/code_java/SortedRatingApp/src/main/java/edu/classes/mr/SortedRatingDriver.java)
-6. [Mapper class](/code_java/SortedRatingApp/src/main/java/edu/classes/mr/SortedRatingMapper.java)
-7. [Reducer class](/code_java/SortedRatingApp/src/main/java/edu/classes/mr/SortedRatingReducer.java)
+1. [pom.xml](../projects/java/SortedRatingApp/pom.xml)
+2. [Review model class](../projects/java/SortedRatingApp/src/main/java/edu/classes/mr/Review.java)
+3. [Custom writable class](../projects/java/SortedRatingApp/src/main/java/edu/classes/mr/RatingKeyWritable.java)
+4. [Enum for json parsing result](../projects/java/SortedRatingApp/src/main/java/edu/classes/mr/ReviewState.java)
+5. [Driver class](../projects/java/SortedRatingApp/src/main/java/edu/classes/mr/SortedRatingDriver.java)
+6. [Mapper class](../projects/java/SortedRatingApp/src/main/java/edu/classes/mr/SortedRatingMapper.java)
+7. [Reducer class](../projects/java/SortedRatingApp/src/main/java/edu/classes/mr/SortedRatingReducer.java)
 8. Test class: `TODO`
 
 ## Partitioning and sorting by custom key

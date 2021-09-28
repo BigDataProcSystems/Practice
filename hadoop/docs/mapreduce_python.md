@@ -37,11 +37,11 @@ To get started, you need to have done the following:
 
 Mapper
 
-[tokenizer_mapper.py](/code_py/wordcountapp/tokenizer_mapper.py)
+[tokenizer_mapper.py](../projects/py/wordcountapp/tokenizer_mapper.py)
 
 Combiner/Reducer
 
-[intsum_reducer.py](/code_py/wordcountapp/intsum_reducer.py)
+[intsum_reducer.py](../projects/py/wordcountapp/intsum_reducer.py)
 
 ## Running MapReduce with local files
 
@@ -62,8 +62,8 @@ Run the full map-reduce pipeline:
 ```
 yarn jar $HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.1.2.jar \
     -D mapreduce.job.reduces=2 \
-    -mapper "python /PATH/code_py/wordcountapp/tokenizer_mapper.py/tokenizer_mapper.py" \
-    -reducer "python /PATH/code_py/wordcountapp/intsum_reducer.py" \
+    -mapper "python /PATH/py/wordcountapp/tokenizer_mapper.py/tokenizer_mapper.py" \
+    -reducer "python /PATH/py/wordcountapp/intsum_reducer.py" \
     -input "/data/yarn/reviews_Electronics_5_2.json" \
     -output "/data/yarn/output"
 ```

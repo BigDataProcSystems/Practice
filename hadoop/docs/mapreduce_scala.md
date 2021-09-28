@@ -45,9 +45,9 @@ App --> src --> main --> scala/
 
 ## Sample `source code`
 
-[WordCount.scala](/code_scala/WordCountApp/src/main/scala/edu/classes/mr/WordCount.scala)
+[WordCount.scala](../projects/scala/WordCountApp/src/main/scala/edu/classes/mr/WordCount.scala)
 
-[build.sbt](/code_scala/WordCountApp/build.sbt)
+[build.sbt](../projects/scala/WordCountApp/build.sbt)
 
 ## Running MapReduce with local files
 
