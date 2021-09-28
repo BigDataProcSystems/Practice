@@ -51,6 +51,21 @@ By the end of this guide you will be able to:
 
 You can find all configuration files that you should apply by following the link: [configuration files](../config/hdfs).
 
+
+Or run the following commands to download:
+
+```bash
+# .profile
+wget -O ~/.profile https://raw.githubusercontent.com/BigDataProcSystems/Practice/master/hadoop/config/hdfs/.profile
+# hadoop-env.sh
+wget -O ~/BigData/hadoop/etc/hadoop/hadoop-env.sh https://raw.githubusercontent.com/BigDataProcSystems/Practice/master/hadoop/config/hdfs/hadoop-env.sh
+# core-site.xml
+wget -O ~/BigData/hadoop/etc/hadoop/core-site.xml https://raw.githubusercontent.com/BigDataProcSystems/Practice/master/hadoop/config/hdfs/core-site.xml
+# hdfs-site.xml
+wget -O ~/BigData/hadoop/etc/hadoop/hdfs-site.xml https://raw.githubusercontent.com/BigDataProcSystems/Practice/master/hadoop/config/hdfs/hdfs-site.xml
+```
+
+
 #### Running HDFS
 
 Preparation:
@@ -140,7 +155,7 @@ Read edit logs:
 
 ### Create Java project in IntelliJ (v2019.2+)
 
-1) Open IntelliJ
+1) Open IntelliJ (run the script at the first start: `/home/ubuntu/ML/ideaic/bin/idea.sh`)
 2) `Create New Project` on start or `File` -> `Project...`
 
 #### Main option 
