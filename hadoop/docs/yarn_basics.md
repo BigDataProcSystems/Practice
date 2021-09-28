@@ -3,15 +3,14 @@ Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 
 ## Contents
 
-- Prerequisites
-- Configuration files
-- Scheduler
-    - Capacity scheduler
-    - Queue hierarchy
-    - Refreshing queue configuration
-    - Others
-- Run applications
-- References
+- [Prerequisites](#Prerequisites)
+- [Configuration files](#Configuration-files)
+- [Scheduler](#Scheduler)
+    - [Capacity scheduler](#Capacity-scheduler)
+    - [Queue hierarchy](#Queue-hierarchy)
+    - [Refreshing queue configuration](#Refreshing-queue-configuration)
+    - [Others](#Others)
+- [Running applications](#Running-applications)
 
 ## Prerequisites
 
@@ -116,7 +115,7 @@ Full configurations you can find in `config/yarn` and `config/mapreduce`.
 To read more about configuring the Capacity Scheduler, go to the link: [Hadoop: Capacity Scheduler](https://hadoop.apache.org/docs/r3.1.2/hadoop-yarn/hadoop-yarn-site/CapacityScheduler.html)
 
 
-## Run applications
+## Running applications
 
 For a single node cluster, tasks can fail due to resource scarcity. In this case you have to disable memory check. Change `yarn-site.xml` by adding the following strings:
 
@@ -167,7 +166,7 @@ Copy the file from your local filesystem to HDFS
 
 `hdfs dfs -copyFromLocal ~/datasets/reviews/reviews_Electronics_5.json /data/yarn/`
 
-### Running application
+### Running MapReduce application
 
 Remove the output directory if exists:
 
