@@ -46,6 +46,17 @@ Precedence rules:
 
 The configuration files you can find [here](../config/yarn).
 
+Or run the following commands to download and replace the local configuration files:
+
+```bash
+# yarn-site.xml
+wget -O ~/BigData/hadoop/etc/hadoop/yarn-site.xml https://raw.githubusercontent.com/BigDataProcSystems/Practice/master/hadoop/config/yarn/yarn-site.xml
+# capacity-scheduler.xml
+wget -O ~/BigData/hadoop/etc/hadoop/capacity-scheduler.xml https://raw.githubusercontent.com/BigDataProcSystems/Practice/master/hadoop/config/yarn/capacity-scheduler.xml
+# mapred-site.xml
+wget -O ~/BigData/hadoop/etc/hadoop/mapred-site.xml https://raw.githubusercontent.com/BigDataProcSystems/Practice/master/hadoop/config/mapreduce/mapred-site.xml
+```
+
 ### Memory allocation and vcores
 
 NodeManager memory
@@ -77,7 +88,7 @@ Example,
 ```xml
 <property>
     <name>yarn.scheduler.capacity.queue-mappings</name>
-    <value>g:bigdata:dev</value>
+    <value>g:ubuntu:dev</value>
 </property>
 <property>
     <name>yarn.scheduler.queue-placement-rules.app-name</name>
@@ -124,6 +135,16 @@ For a single node cluster, tasks can fail due to resource scarcity. In this case
 
 Here is the path to the configuration file with correct settings: `config/mapreduce/mapred-site.xml`
 
+### Starting HDFS and YARN
+
+`$HADOOP_HOME/sbin/start-dfs.sh`
+
+`$HADOOP_HOME/sbin/start-yarn.sh`
+
+`$HADOOP_HOME/bin/mapred --daemon start historyserver`
+
+`jps`
+
 ### Downloading and unpacking dataset
 
 Create a new directory for a dataset:
@@ -138,15 +159,13 @@ Unpack the archive
 
 `gzip -dk ~/datasets/reviews/reviews_Electronics_5.json.gz`
 
-### Starting HDFS and YARN
+Create the directory in HDFS
 
-`$HADOOP_HOME/sbin/start-dfs.sh`
+`hdfs dfs -mkdir -p /data/yarn`
 
-`$HADOOP_HOME/sbin/start-yarn.sh`
+Copy the file from your local filesystem to HDFS
 
-`$HADOOP_HOME/bin/mapred --daemon start historyserver`
-
-`jps`
+`hdfs dfs -copyFromLocal ~/datasets/reviews/reviews_Electronics_5.json /data/yarn/`
 
 ### Running application
 
