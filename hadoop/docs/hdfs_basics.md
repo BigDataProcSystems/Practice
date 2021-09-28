@@ -5,14 +5,14 @@ Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 
 ## Contents
 
-- HDFS Shell Commands
-- HDFS Java API
-    - Reading Files
-    - Copying Files From Local To HDFS
-    - Other manipulations
-- Running on Cloudera
-- HDFS on EMR Cluster
-- References
+- [Prerequisites](#Prerequisites)
+- [Objectives](#Objectives)
+- [Configuration](#Configuration)
+- [HDFS Shell Commands](#HDFS-Shell-Commands)
+- [HDFS Java API](#HDFS-Java-API)
+- [Running on Docker cluster](#Running-on-Docker-cluster)
+- [Running on AWS using Cloudera](#Running-on-Cloudera)
+- [HDFS on EMR Cluster](#HDFS-on-EMR-Cluster)
 
 ## Prerequisites
 
