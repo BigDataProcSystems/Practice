@@ -349,7 +349,7 @@
 
     <property>
         <name>yarn.scheduler.capacity.queue-mappings</name>
-        <value>g:bigdata:dev</value>
+        <value>g:ubuntu:dev</value>
         <description>
         This configuration specifies the mapping of user or group to a specific queue. You can map 
         a single user or a list of users to queues. Syntax: [u or g]:[name]:[queue_name][,next_mapping]*. 
