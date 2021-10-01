@@ -6,6 +6,7 @@
 - [Образ Ubuntu](#Образ-Ubuntu)
 - [Файловая система](#Файловая-система)
     - [Отображение содержимого каталогов](#Отображение-содержимого-каталога)
+    - [Поиск](#Поиск)
     - [Управление файлами и каталогами](#Управление-файлами-и-каталогами)
     - [Управление пользователями и группами](#Управление-пользователями-и-группами)
     - [Права доступа](#Права-доступа)
@@ -18,11 +19,12 @@
     - [`zip`/`unzip`](#zip/unzip)
 - [Управление сетью](#Управление-сетью)
     - [Настройка сети посредством `netplan`](#Настройка-сети-посредством-netplan)
-    - [Отслеживание состояния сети](#Отслеживание-состояния-сети)
+    - [Отображение состояния и параметров сети](#Отображение-состояния-и-параметров-сети)
         - [`ip addr`](#ip-addr)
         - [`ip link`](#ip-link)
         - [`ip neighbor`](#ip-neighbor)
         - [`ip route`](#ip-route)
+    - [Беспроводные устройства](#Беспроводные-устройства)
     - [Контроль трафика](#Контроль-трафика)
         - [`iptables`](#iptables)
         - [`ufw`](#ufw)
@@ -69,6 +71,14 @@ sudo adduser $USER vboxsf
 Поиск по истории команд в терминале
 
 `Ctrl+r`
+
+Копирование в буфер обмена
+
+`Ctrl+Shift+c`
+
+Вставка из буфера обмена
+
+`Ctrl+Shift+v`
 
 Справка по командам
 
@@ -146,6 +156,16 @@ sudo apt install tree
 tree -L 2 /home/ubuntu
 ```
 
+
+## Поиск
+
+```bash
+sudo find $PATH -name $SUBSTRING_OR_PATTERN
+```
+
+```
+sudo find / -name *.md
+```
 
 ## Управление файлами и каталогами
 
@@ -673,6 +693,23 @@ cat ~/Downloads/index.html | less
 tar -cvJ -f ${ARCHIVE.tar.xz} $SOURCE
 ```
 
+```bash
+tar -cvJ -C $SOURCE_PATH -f ${ARCHIVE.tar.xz} $SOURCE
+```
+
+Сжатие данных
+
+- `-j` - bzip2 (`tar.bz2`)
+- `-J` - xz (`tar.xz`)
+- `-z` - gzip (`tar.gz`)
+- `-a` - автоматическое определение по расширению
+
+Отображение содержания архива
+
+```bash
+tar -tf ${ARCHIVE.tar.xz}
+```
+
 Распаковка архива
 
 ```bash
@@ -685,6 +722,16 @@ tar -xv -f ${ARCHIVE.tar.xz} --directory $DESTINATION --strip-components 1
 
 ```bash
 zip ${ARCHIVE.zip} -r $SOURCE
+```
+
+```bash
+cd $SOURCE_PATH; zip $DESTINATION_PATH/${ARCHIVE.zip} -r $SOURCE
+```
+
+Отображение содержания архива
+
+```bash
+unzip -l ${ARCHIVE.zip} 
 ```
 
 Распаковка архива
@@ -734,7 +781,7 @@ cat /var/lib/NetworkManager/${DHCP_CLIENT.lease}
 # TODO: change dns server
 ```
 
-### Отслеживание состояния сети
+### Отображение состояния и параметров сети
 
 #### `ip addr`
 
@@ -785,29 +832,116 @@ ip neighbour
 ip route
 ```
 
+### Беспроводные устройства
+
+Поиск беспроводных устройств
+
+```
+sudo lshw -C network
+```
+
+```
+lspci
+```
+
+```
+lsusb
+```
+
+Беспроводные интерфейсы (Wi-Fi)
+
+```
+iw dev
+```
+
+```
+iwconfig
+```
+
+
+Список беспроводных устройств
+
+```
+sudo rfkill list
+```
+
+Отключить устройство
+
+```
+sudo rfkill block 1
+```
+
+Включить устройство
+
+```
+sudo rfkill unblock 1
+```
+
 ### Контроль трафика
 
 #### `iptables`
 
-Перенаправление запроса
+Блокировка исходящих запросов на определенный адрес с портом 443 (`https`)
 
 ```
-sudo iptables -t nat -A OUTPUT -d 217.69.139.200 -j DNAT --to-destination 173.194.73.94
+sudo iptables -t filter -A OUTPUT -p tcp -d yandex.ru --dport 443 -j REJECT
 ```
+
+Отображение добавленного правила
+
+```
+sudo iptables -L -n
+```
+
+или
+
+```
+sudo iptables -t filter -L -n
+```
+
+Почему несколько?
+
+```
+host yandex.ru
+```
+
+Блокировка всех исходящих запросов на определенный адрес
+
+```
+sudo iptables -t filter -A OUTPUT -d yandex.ru -j REJECT
+```
+
+Создание правила для перенаправления запроса
+
+```
+sudo iptables -t nat -A OUTPUT -d google.ru -j DNAT --to-destination 94.100.180.200
+```
+
+```
+sudo iptables -t nat -A OUTPUT -d 217.69.139.200 -j DNAT --to-destination 74.125.205.94
+```
+
+Отображение правил `nat` таблицы
 
 ```bash
 sudo iptables -t nat -S
 ```
 
+Отображения правил `nat` таблицы для исходящего трафика
+
 ```bash
 sudo iptables -t nat -L OUTPUT -n
 ```
 
+Удаление правила
+
 ```bash
-sudo iptables  -t nat -D OUTPUT 1
+sudo iptables -t nat -D OUTPUT 1
 ```
 
 #### `ufw`
+
+
 
 
 ```bash
@@ -869,9 +1003,19 @@ nc localhost 23
 
 #### `ssh`
 
+Управление SSH сервисом
+
+```bash
+sudo systemctl status|enable|disable|start|stop|restart ssh
+```
+
+Подключение с паролем
+
 ```
 ssh USERNAME@HOST -p 22
 ```
+
+Подключение по ключу
 
 ```
 ssh-keygen -t rsa -P '' -f $HOME/.ssh/id_rsa
