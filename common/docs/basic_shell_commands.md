@@ -1003,6 +1003,12 @@ nc localhost 23
 
 #### `ssh`
 
+Установите SSH сервер (если не установлен)
+
+```bash
+sudo apt install openssh-server
+```
+
 Управление SSH сервисом
 
 ```bash
