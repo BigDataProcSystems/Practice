@@ -1011,22 +1011,22 @@ sudo systemctl status|enable|disable|start|stop|restart ssh
 
 Подключение с паролем
 
-```
-ssh USERNAME@HOST -p 22
+```bash
+ssh $REMOTE_USERNAME@$REMOTE_HOST -p 22
 ```
 
 Подключение по ключу
 
-```
+```bash
 ssh-keygen -t rsa -P '' -f $HOME/.ssh/id_rsa
 ```
 
-```
-ssh-copy-id -i $HOME/.ssh/id_rsa_alex.pub USERNAME@HOST
+```bash
+ssh-copy-id -i $HOME/.ssh/id_rsa.pub $REMOTE_USERNAME@$REMOTE_HOST
 ```
 
-```
-ssh -i ~/.ssh/id_rsa USERNAME@HOST
+```bash
+ssh -i ~/.ssh/id_rsa $REMOTE_USERNAME@$REMOTE_HOST
 ```
 
 #### `scp`
@@ -1034,19 +1034,19 @@ ssh -i ~/.ssh/id_rsa USERNAME@HOST
 Копирование файла на удаленный узел
 
 ```bash
-scp -P 22 -i $HOME/.ssh/id_rsa_alex $FILE USERNAME@HOST:$REMOTE_DIR
+scp -P 22 -i $HOME/.ssh/id_rsa $FILE $REMOTE_USERNAME@$REMOTE_HOST:$REMOTE_DIR
 ```
 
 Копирование файла на локальный узел
 
 ```bash
-scp -i $HOME/.ssh/id_rsa_alex USERNAME@HOST:$FILE $LOCAL_DIR
+scp -i $HOME/.ssh/id_rsa $REMOTE_USERNAME@$REMOTE_HOST:$FILE $LOCAL_DIR
 ```
 
 Копирование каталога на удаленный узел 
 
 ```bash
-scp -r -i $HOME/.ssh/id_rsa_alex $LOCAL_DIR USERNAME@HOST:$REMOTE_DIR
+scp -r -i $HOME/.ssh/id_rsa $LOCAL_DIR $REMOTE_USERNAME@$REMOTE_HOST:$REMOTE_DIR
 ```
 
 
