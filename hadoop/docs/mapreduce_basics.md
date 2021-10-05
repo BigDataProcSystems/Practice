@@ -97,11 +97,11 @@ Check out whether all daemons are running:
 
 ## Java source code for WordCount example
 
-1. [Main class](/code_java/WordCountApp/src/main/java/edu/classes/mr/WordCount.java)
+1. [Main class](../projects/java/WordCountApp/src/main/java/edu/classes/mr/WordCount.java)
 
-2. [Test class](/code_java/WordCountApp/src/test/java/edu/classes/mr/WordCountTest.java)
+2. [Test class](../projects/java//WordCountApp/src/test/java/edu/classes/mr/WordCountTest.java)
 
-3. [pom.xml](/code_java/WordCountApp/pom.xml)
+3. [pom.xml](../projects/java/WordCountApp/pom.xml)
 
 ## Running MapReduce with local files
 
