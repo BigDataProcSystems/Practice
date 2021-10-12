@@ -5,15 +5,14 @@ Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 
 ## Contents
 
-- Prerequisites
-- Configuration
-- MapReduce configuration
-- Creating Java project in IntelliJ
-- Source code in Java
-- Running MapReduce with local files
-- Building `jar` file with `maven`
-- Running MapReduce `jar` file on YARN cluster
-- References
+- [Prerequisites](#Prerequisites)
+- [Configuration](#Configuration)
+- [Computation Flow](#Computation-Flow)
+- [Creating Java project in IntelliJ](#Creating-Java-project-in-IntelliJ)
+- [Source code in Java](#Source-code-in-Java)
+- [Running MapReduce with local files](#Running-MapReduce-with-local-file)
+- [Building `jar` file with `maven`](#Building-`jar`-file-with-`maven`)
+- [Running MapReduce `jar` file on YARN cluster](#Running-MapReduce-`jar`-file-on-YARN-cluster)
 
 ## Prerequisites
 
@@ -27,6 +26,14 @@ To get started, you need to have done the following:
 ## Configuration
 
 See [Introduction to MapReduce](mapreduce_basics.md)
+
+## Computation Flow 
+
+<center>
+
+![MapReduce Computation Flow](img/mapreduce_average.jpg "MapReduce Flow")
+
+</center>
 
 ## Creating Java project in IntelliJ (v2019.2)
 
