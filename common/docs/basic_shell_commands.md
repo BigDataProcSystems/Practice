@@ -177,6 +177,12 @@ mkdir class
 ```
 
 ```bash
+mkdir -p class
+```
+- `p` - создает родительские каталоги, если не существуют, и, если каталог уже существует, не выдает ошибку
+
+
+```bash
 cd class
 ```
 
@@ -883,48 +889,70 @@ sudo rfkill unblock 1
 
 Блокировка исходящих запросов на определенный адрес с портом 443 (`https`)
 
-```
+```bash
 sudo iptables -t filter -A OUTPUT -p tcp -d yandex.ru --dport 443 -j REJECT
 ```
+где
+- `t` - тип таблицы (`filter`, `nat` и др.)
+- `A` - добавление правила
+- `p` - протокол (`tcp`, `udp`, `icmp` или `all`)
+- `d` - адрес получателя
+- `dport` - порт получателя
+- `j` - цель правила (то, что необходимо сделать) 
 
 Отображение добавленного правила
 
-```
+```bash
 sudo iptables -L -n
 ```
 
+где
+
+- `L` - вывод списка правил (по умолчанию таблицы `filter`)
+- `n` - использовать при выводе числовые значения для портов и адресов
+
 или
 
-```
+```bash
 sudo iptables -t filter -L -n
 ```
 
 Почему несколько?
 
-```
+```bash
 host yandex.ru
 ```
 
 Блокировка всех исходящих запросов на определенный адрес
 
-```
+```bash
 sudo iptables -t filter -A OUTPUT -d yandex.ru -j REJECT
 ```
 
 Создание правила для перенаправления запроса
 
-```
+```bash
 sudo iptables -t nat -A OUTPUT -d google.ru -j DNAT --to-destination 94.100.180.200
 ```
 
+- `to-destination` - замена адресата (для `DNAT`)
+
+С указанием протокола и портов
+
+```bash
+sudo iptables -t nat -A OUTPUT -p tcp --dport 443 -d google.ru -j DNAT --to-destination 94.100.180.200:443
 ```
+
+Весь трафик
+
+```bash
 sudo iptables -t nat -A OUTPUT -d 217.69.139.200 -j DNAT --to-destination 74.125.205.94
 ```
 
 Отображение правил `nat` таблицы
 
 ```bash
-sudo iptables -t nat -S
+sudo iptables -t nat -L
 ```
 
 Отображения правил `nat` таблицы для исходящего трафика
@@ -939,14 +967,64 @@ sudo iptables -t nat -L OUTPUT -n
 sudo iptables -t nat -D OUTPUT 1
 ```
 
+Удаление всех записей таблицы
+
+```bash
+sudo iptables -t nat -F
+```
+
+Разрешить входящий трафик на порт 23
+
+```bash
+sudo iptables -A INPUT -p tcp --dport 23 -j ACCEPT
+```
+
+Запретить входящий трафик на порт 23
+
+```bash
+sudo iptables -A INPUT -p tcp --dport 23 -j REJECT
+```
+
+Сохранить правила в файле
+
+```bash
+sudo iptables-save > iptables.rules
+```
+
+Загрузить правила из файла
+
+```bash
+sudo iptables-restore < iptables.rules
+```
+
+
 #### `ufw`
 
 
-
+```bash
+sudo ufw status|enable|disable
+```
 
 ```bash
-# TODO: ufw
+sudo ufw enable
 ```
+
+```bash
+sudo ufw allow 23
+```
+
+```bash
+sudo ufw status
+```
+
+```bash
+sudo ufw reject 23
+```
+
+```bash
+sudo ufw disable
+```
+
 
 ### Мониторинг соединений
 
@@ -988,12 +1066,19 @@ nc -zv localhost 1-1000
 ```
 
 ```bash
-nc -zv localhost 22
+nc -zv localhost 23
 ```
 
 ```bash
-nc -l -p 23
+sudo nc -l -p 23
 ```
+
+Если не работает, то разрешите входной трафик на порт 23 (ранее его запретили)
+
+```bash
+sudo iptables -R INPUT 1 -p tcp --dport 23 -j ACCEPT
+```
+где `R` - замена правила
 
 ```bash
 nc localhost 23
@@ -1003,10 +1088,25 @@ nc localhost 23
 
 #### `ssh`
 
-Установите SSH сервер (если не установлен)
+Установите SSH сервер на `$REMOTE_HOST` (если не установлен)
 
 ```bash
 sudo apt install openssh-server
+```
+
+Конфигурационные файлы
+
+- на сервере
+```bash
+sudo nano /etc/ssh/sshd_config
+```
+- на клиенте (общие)
+```bash
+sudo nano /etc/ssh/ssh_config
+```
+- на клиенте для конкретного пользователя (если нет, то можно создать)
+```bash
+nano ~/.ssh/config
 ```
 
 Управление SSH сервисом
@@ -1035,6 +1135,10 @@ ssh-copy-id -i $HOME/.ssh/id_rsa.pub $REMOTE_USERNAME@$REMOTE_HOST
 ssh -i ~/.ssh/id_rsa $REMOTE_USERNAME@$REMOTE_HOST
 ```
 
+```bash
+# TODO: add the key path to a config file
+```
+
 #### `scp`
 
 Копирование файла на удаленный узел
@@ -1055,4 +1159,39 @@ scp -i $HOME/.ssh/id_rsa $REMOTE_USERNAME@$REMOTE_HOST:$FILE $LOCAL_DIR
 scp -r -i $HOME/.ssh/id_rsa $LOCAL_DIR $REMOTE_USERNAME@$REMOTE_HOST:$REMOTE_DIR
 ```
 
+#### Проброс портов
 
+```bash
+ssh -Nf -L $LOCAL_PORT:$REMOTE_HOST:$REMOTE_PORT -i $HOME/.ssh/id_rsa $REMOTE_USERNAME@$REMOTE_HOST
+```
+
+```
+ssh -Nf -L 8080:127.0.0.1:8080 -i $HOME/.ssh/id_rsa alex@127.0.0.1
+```
+
+```bash
+ps aux | grep ssh
+kill $PID
+```
+
+#### Динамический проброс портов
+
+```
+ssh -D $LOCAL_PORT $REMOTE_USERNAME@$REMOTE_HOST
+```
+
+```
+ssh -Nf -D 9090 alex@127.0.0.1
+```
+
+#### Запуск графический приложений по `ssh`
+
+Открываем окно файлового менеджера сервера (удаленный узел) на стороне клиента (локальный узел)
+
+```bash
+ssh -X -n -i $HOME/.ssh/id_rsa $REMOTE_USERNAME@$REMOTE_HOST nautilus --new-window
+```
+
+```bash
+ssh -X -n -i $HOME/.ssh/id_rsa alex@127.0.0.1 nautilus --new-window
+```
