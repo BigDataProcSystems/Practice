@@ -38,12 +38,12 @@ To get started, you need to have done the following:
 
 ## Datasets
 
-- [Small subset of reviews](https://github.com/BigDataProcSystems/Hadoop/blob/master/data/samples_100.json)
+- [Small subset of reviews](../data/spark-rdd-intro/samples_100.json)
 - [Amazon product datasets](http://jmcauley.ucsd.edu/data/amazon/links.html)
 
 ## Source Code
 
-1. [Word Count for Review Text](https://github.com/BigDataProcSystems/Spark_RDD/blob/master/code/python/reviewsparkapp/wcount_reviews.py)
+1. [Word Count for Review Text](../code/python/reviewsparkapp/wcount_reviews.py)
 
 Code Snippet
 
@@ -95,7 +95,7 @@ def main(input_file, output_path):
 ...
 ```
 
-2. [Average Product Rating](https://github.com/BigDataProcSystems/Spark_RDD/blob/master/code/python/reviewsparkapp/avgratings_reviews.py)
+2. [Average Product Rating](../code/python/reviewsparkapp/avgratings_reviews.py)
 
 Code Snippet
 

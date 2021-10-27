@@ -28,15 +28,15 @@ Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 
 ## Datasets
 
-- [Small subset of reviews](https://github.com/BigDataProcSystems/Hadoop/blob/master/data/samples_100.json)
+- [Small subset of reviews](../data/spark-rdd-intro/samples_100.json)
 - [Amazon product datasets](http://jmcauley.ucsd.edu/data/amazon/links.html)
 
 
 ## Source Code
 
-1. [pom.xml](https://github.com/BigDataProcSystems/Spark_RDD/blob/master/code/java/WordCountReviewApp/pom.xml)
-2. [Review model class](https://github.com/BigDataProcSystems/Spark_RDD/blob/master/code/java/WordCountReviewApp/src/main/java/edu/classes/spark/Review.java)
-3. [Driver class](https://github.com/BigDataProcSystems/Spark_RDD/blob/master/code/java/WordCountReviewApp/src/main/java/edu/classes/spark/WordCountReviewDriver.java)
+1. [pom.xml](../code/java/WordCountReviewApp/pom.xml)
+2. [Review model class](../code/java/WordCountReviewApp/src/main/java/edu/classes/spark/Review.java)
+3. [Driver class](../code/java/WordCountReviewApp/src/main/java/edu/classes/spark/WordCountReviewDriver.java)
 4. Test class: `TODO`
 
 
