@@ -2,8 +2,6 @@
 ## Part 2. Self-Contained Application
 Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 
-#### [Version 2018](https://nbviewer.jupyter.org/github/BigDataProcSystems/Hadoop/blob/2018/mapreduce_basics.ipynb)
-
 ## Contents
 
 - Prerequisites
