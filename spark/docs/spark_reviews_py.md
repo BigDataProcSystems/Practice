@@ -79,11 +79,11 @@ def main(input_file, output_path):
     sc = create_spark_context()
 
     # Count words
-    wcount_rdd = sc.textFile(input_file) \
-        .mapPartitions(extract_words) \
-        .reduceByKey(lambda v1, v2: v1 + v2) \
-        .sortBy(lambda x: -x[1]) \
-        .map(lambda x: "{}\t{}".format(x[0], x[1])) \
+    wcount_rdd = sc.textFile(input_file)\
+        .mapPartitions(extract_words)\
+        .reduceByKey(lambda v1, v2: v1 + v2)\
+        .sortBy(lambda x: -x[1])\
+        .map(lambda x: "{}\t{}".format(x[0], x[1]))\
         .coalesce(1)
 
     # Save the result
@@ -131,12 +131,12 @@ def main(input_file, output_path):
     sc = create_spark_context()
 
     # Calculate average ratings
-    avg_prod_rating_rdd = sc.textFile(input_file) \
-        .mapPartitions(extract_prod_rating_per_partition) \
+    avg_prod_rating_rdd = sc.textFile(input_file)\
+        .mapPartitions(extract_prod_rating_per_partition)\
         .aggregateByKey((0,0),
                         lambda x, value: (x[0] + value, x[1] + 1),
-                        lambda x, y: (x[0] + y[0], x[1] + y[1])) \
-        .map(lambda x: "{}\t{}".format(x[0], x[1][0]/x[1][1])) \
+                        lambda x, y: (x[0] + y[0], x[1] + y[1]))\
+        .map(lambda x: "{}\t{}".format(x[0], x[1][0]/x[1][1]))\
         .coalesce(1)
 
     # Save the result
@@ -247,13 +247,13 @@ Run `YARN`:
 
 `$HADOOP_HOME/sbin/start-yarn.sh`
 
-Run the Job History Server:
+Run `History Server`:
 
-`mapred --daemon start historyserver`
+`$SPARK_HOME/sbin/start-history-server.sh`
 
 Or all in one line command:
 
-`$HADOOP_HOME/sbin/start-dfs.sh && $HADOOP_HOME/sbin/start-yarn.sh && mapred --daemon start historyserver`
+`$HADOOP_HOME/sbin/start-dfs.sh && $HADOOP_HOME/sbin/start-yarn.sh && $SPARK_HOME/sbin/start-history-server.sh`
 
 Check out whether all daemons are running:
 
