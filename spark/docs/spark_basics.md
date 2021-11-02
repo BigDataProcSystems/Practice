@@ -44,7 +44,7 @@ Modify the aforementioned configuration files in the following way:
 `.profile`
 ```
 # Spark configuration
-export SPARK_HOME=$HOME/BigData/hadoop/spark
+export SPARK_HOME=$HOME/BigData/spark
 export SPARK_CONF_DIR=$SPARK_HOME/conf
 PATH=$SPARK_HOME/bin:$PATH
 ```
