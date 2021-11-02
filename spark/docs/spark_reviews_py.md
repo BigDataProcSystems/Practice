@@ -158,8 +158,8 @@ Create a configuration to run:
 1) `Run` -> `Edit Configurations...`
 2) `Add new configuration...` for Application -> Name: `wordcount`
 3) Script path: `/YOUR_LOCAL_PATH/reviewsparkapp/wcount_reviews.py`
-4) Program arguments: `INPUT_LOCAL_FILE OUTPUT_LOCAL_DIR`, e.g. `data/samples_100.json output` for a local file system
-5) Environment variable: `PYTHONUNBUFFERED=1;PYSPARK_PYTHON=/opt/anaconda3/bin/python;PYSPARK_DRIVER_PYTHON=/opt/anaconda3/bin/python;SPARK_MASTER=local[2]`
+4) Program arguments: `INPUT_LOCAL_FILE OUTPUT_LOCAL_DIR`, e.g. `file:///YOUR_PATH/samples_100.json file:///YOUR_PATH/output` for your local filesystem
+5) Environment variable: `PYTHONUNBUFFERED=1;PYSPARK_PYTHON=/home/ubuntu/ML/anaconda3/bin/python;PYSPARK_DRIVER_PYTHON=/home/ubuntu/ML/anaconda3/bin/python;SPARK_MASTER=local[2]`
 6) Working directory: `/YOUR_LOCAL_PATH/reviewsparkapp`
 7) `Apply` -> `OK`
 8) `Run` -> `Run...` -> Choose your configuration
@@ -262,17 +262,25 @@ Check out whether all daemons are running:
 
 #### Launching application
 
+Create a directory in HDFS for input data if needed:
+
+`hdfs dfs -mkdir -p /data/reviews`
+
+Add reviews to HDFS if needed:
+
+`hdfs dfs -copyFromLocal YOUR_LOCAL_FILE /data/reviews`
+
 Remove the output directory if needed:
 
-`hdfs dfs -rm -r -f /data/yarn/output`
+`hdfs dfs -rm -r -f /data/reviews/output`
 
 Run the job:
 
 ```
 spark-submit --master yarn --deploy-mode cluster --name ReviewPySparkClusterApp \
     wcount_reviews.py \
-    /data/yarn/samples_100.json \
-    /data/yarn/output
+    /data/reviews/samples_100.json \
+    /data/reviews/output
 ```
 
 
@@ -302,6 +310,12 @@ spark-submit --master yarn --deploy-mode cluster --name ReviewPySparkClusterApp 
     /data/yarn/samples_100.json \
     /data/yarn/output
 ```
+
+Parameters:
+- `--executor-memory 1g`
+- `--executor-cores 2`
+- `--num-executors 4`
+
 
 Job output:
 

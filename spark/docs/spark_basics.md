@@ -44,7 +44,7 @@ Modify the aforementioned configuration files in the following way:
 `.profile`
 ```
 # Spark configuration
-export SPARK_HOME=/usr/lib/spark
+export SPARK_HOME=$HOME/BigData/hadoop/spark
 export SPARK_CONF_DIR=$SPARK_HOME/conf
 PATH=$SPARK_HOME/bin:$PATH
 ```
@@ -54,8 +54,8 @@ PATH=$SPARK_HOME/bin:$PATH
 ```
 export SPARK_MASTER_HOST=localhost
 export SPARK_EXECUTOR_MEMORY=1G # will be overriden by spark-defaults.conf
-export PYSPARK_DRIVER_PYTHON=/opt/anaconda3/bin/python
-export PYSPARK_PYTHON=/opt/anaconda3/bin/python
+export PYSPARK_DRIVER_PYTHON=/home/ubuntu/ML/anaconda3/bin/python
+export PYSPARK_PYTHON=/home/ubuntu/ML/anaconda3/bin/python
 
 ```
 
@@ -70,7 +70,9 @@ spark.executor.cores	1
 spark.executor.memory	512m
 
 spark.eventLog.enabled	true
-spark.eventLog.dir file:///tmp/spark-events
+spark.eventLog.dir file:///home/ubuntu/BigData/tmp/spark
+
+spark.history.fs.logDirectory file:///home/ubuntu/BigData/tmp/spark
 ```
 
 `slaves` (for the standalone mode)
@@ -177,9 +179,9 @@ Create a new Python notebook and run a cell with the following code:
 import os
 import sys
 
-os.environ["SPARK_HOME"]="/usr/lib/spark"
-os.environ["PYSPARK_PYTHON"]="/opt/anaconda3/bin/python"
-os.environ["PYSPARK_DRIVER_PYTHON"]="/opt/anaconda3/bin/python"
+os.environ["SPARK_HOME"]="/home/ubuntu/BigData/spark"
+os.environ["PYSPARK_PYTHON"]="/home/ubuntu/ML/anaconda3/bin/python"
+os.environ["PYSPARK_DRIVER_PYTHON"]="/home/ubuntu/ML/anaconda3/bin/python"
 
 spark_home = os.environ.get("SPARK_HOME")
 sys.path.insert(0, os.path.join(spark_home, "python"))
@@ -195,12 +197,12 @@ Create the file with the content shown below to connect a `python` kernel to `Ju
     "display_name": "spark-python",
     "language_info": { "name": "python" },
     "codemirror_mode": "spark-python",
-    "argv": ["/opt/anaconda3/bin/python", "-m", "ipykernel", "-f", "{connection_file}"],
+    "argv": ["/home/ubuntu/ML/anaconda3/bin/python", "-m", "ipykernel", "-f", "{connection_file}"],
     "env": {
-        "SPARK_HOME": "/usr/lib/spark",
-        "PYSPARK_PYTHON": "/opt/anaconda3/bin/python",
-        "PYSPARK_DRIVER_PYTHON": "/opt/anaconda3/bin/python",
-        "PYTHONPATH": "/usr/lib/spark/python:/usr/lib/spark/python/lib/py4j-0.10.7-src.zip"
+        "SPARK_HOME": "/home/ubuntu/BigData/spark",
+        "PYSPARK_PYTHON": "/home/ubuntu/ML/anaconda3/bin/python",
+        "PYSPARK_DRIVER_PYTHON": "/home/ubuntu/ML/anaconda3/bin/python",
+        "PYTHONPATH": "/home/ubuntu/BigData/spark/python:/home/ubuntu/BigData/spark/python/lib/py4j-0.10.7-src.zip"
      }
 }
 ```
