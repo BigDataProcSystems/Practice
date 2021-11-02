@@ -52,12 +52,12 @@ def main(input_file, output_path):
     sc = create_spark_context()
 
     # Calculate average ratings
-    avg_prod_rating_rdd = sc.textFile(input_file) \
-        .mapPartitions(extract_prod_rating_per_partition) \
+    avg_prod_rating_rdd = sc.textFile(input_file)\
+        .mapPartitions(extract_prod_rating_per_partition)\
         .aggregateByKey((0,0),
                         lambda x, value: (x[0] + value, x[1] + 1),
-                        lambda x, y: (x[0] + y[0], x[1] + y[1])) \
-        .map(lambda x: "{}\t{}".format(x[0], x[1][0]/x[1][1])) \
+                        lambda x, y: (x[0] + y[0], x[1] + y[1]))\
+        .map(lambda x: "{}\t{}".format(x[0], x[1][0]/x[1][1]))\
         .coalesce(1)
 
     # Save the result

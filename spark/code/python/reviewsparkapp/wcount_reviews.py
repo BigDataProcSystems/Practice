@@ -52,11 +52,11 @@ def main(input_file, output_path):
     sc = create_spark_context()
 
     # Count words
-    wcount_rdd = sc.textFile(input_file) \
-        .mapPartitions(extract_words) \
-        .reduceByKey(lambda v1, v2: v1 + v2) \
-        .sortBy(lambda x: -x[1]) \
-        .map(lambda x: "{}\t{}".format(x[0], x[1])) \
+    wcount_rdd = sc.textFile(input_file)\
+        .mapPartitions(extract_words)\
+        .reduceByKey(lambda v1, v2: v1 + v2)\
+        .sortBy(lambda x: -x[1])\
+        .map(lambda x: "{}\t{}".format(x[0], x[1]))\
         .coalesce(1)
 
     # Save the result
