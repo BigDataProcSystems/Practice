@@ -49,7 +49,10 @@ kafka_stream = KafkaUtils.createDirectStream(ssc,
 lines = kafka_stream.map(lambda x: x[1])
 
 # Count words for each RDD (mini-batch)
-counts = lines.flatMap(lambda line: line.split()).map(lambda word: (word, 1)).reduceByKey(lambda x1, x2: x1 + x2)
+counts = lines\
+    .flatMap(lambda line: line.split())\
+    .map(lambda word: (word, 1))\
+    .reduceByKey(lambda x1, x2: x1 + x2)
 
 # Update word counts
 total_counts = counts.updateStateByKey(update_total_count)
