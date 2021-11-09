@@ -111,11 +111,11 @@ ssc.awaitTermination()
 
 Run the spark streaming application (above code):
 
-`spark-submit /YOUR_PATH/spark_streaming_kafka_wcount.py`
+`spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2 /YOUR_PATH/spark_streaming_kafka_wcount.py`
 
 By default we use YARN client mode to deploy Spark application. To run locally use the following command with the explicit master argument:
 
-`spark-submit --master local[2] /YOUR_PATH/spark_streaming_kafka_wcount.py`
+`spark-submit --master local[2] --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.2 /YOUR_PATH/spark_streaming_kafka_wcount.py`
 
 Type any text in the producer terminal and look at the output of your application.
 
