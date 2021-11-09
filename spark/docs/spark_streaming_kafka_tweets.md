@@ -206,7 +206,7 @@ Create two py files for Kafka Producer with Twitter API connection (kafka_produc
 
 In terminal create the `tweets-kafka` topic that will refer to tweet stream from Twitter API:
 
-`$KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper localhost:2181 --topic tweets-kafka --partitions 1 --replication-factor 1`
+`$KAFKA_HOME/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --topic tweets-kafka --partitions 1 --replication-factor 1`
 
 Open four terminals:
 
