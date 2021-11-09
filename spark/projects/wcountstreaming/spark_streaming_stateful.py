@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from pyspark import SparkContext
+import os
+
+from pyspark import SparkContext, SparkConf
 from pyspark.streaming import StreamingContext
 
 
@@ -18,8 +20,16 @@ STREAM_PORT = 9999
 # Note: For HDFS it's equal to /user/<YOUR_USER>/tmp_spark_streaming
 CHECKPOINT_DIR = "tmp_spark_streaming"
 
+# Control a master type using environment variable
+SPARK_MASTER = os.environ.get("SPARK_MASTER")
+
+conf = SparkConf()
+
+if SPARK_MASTER:
+    conf.setMaster(SPARK_MASTER)
+
 # Create Spark Context
-sc = SparkContext(appName=APP_NAME)
+sc = SparkContext(appName=APP_NAME, conf=conf)
 
 # Set log level
 #sc.setLogLevel("INFO")
@@ -44,7 +54,6 @@ counts = word_tuples.reduceByKey(lambda x1, x2: x1 + x2)
 def update_total_count(currentCount, countState):
     """
     Update the previous value by a new ones.
-
     Each key is updated by applying the given function 
     on the previous state of the key (count_state) and the new values 
     for the key (current_count).
