@@ -30,11 +30,8 @@ sc = SparkContext(appName=APP_NAME, conf=conf)
 # Set log level
 sc.setLogLevel("ERROR")
 
-# Batch interval (10 seconds)
-batch_interval = 10
-
 # Create Streaming Context
-ssc = StreamingContext(sc, batch_interval)
+ssc = StreamingContext(sc, BATCH_INTERVAL)
 
 # Create a stream (DStream)
 lines = ssc.socketTextStream(STREAM_HOST, STREAM_PORT)
@@ -68,8 +65,9 @@ counts = word_tuples.reduceByKey(lambda x1, x2: x1 + x2)
 counts.pprint()
 
 # Save to permanent storage
-# counts.transform(lambda rdd: rdd.coalesce(1))
-# .saveAsTextFiles("/YOUR_PATH/output/wordCount")
+# counts\
+#     .transform(lambda rdd: rdd.coalesce(1))\
+#     .saveAsTextFiles("/YOUR_PATH/output/wordCount")
 
 # Start Spark Streaming
 ssc.start()
