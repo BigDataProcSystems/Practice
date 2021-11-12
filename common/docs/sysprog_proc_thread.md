@@ -206,16 +206,16 @@ sysprog_thread_lock.py
 import _thread as thread
 
 
-stdoutmutex = thread.allocate_lock()
+# stdoutmutex = thread.allocate_lock()
 exitmutexes = [False] * 5
 
 
-def counter(myId, count):
+def counter(tid, count):
     for i in range(count):
         # stdoutmutex.acquire()
-        print("[{}] => {}".format(myId, i))
+        print("[{}] => {}".format(tid, i))
         # stdoutmutex.release()
-    exitmutexes[myId] = True
+    exitmutexes[tid] = True
 
 
 for i in range(5):
