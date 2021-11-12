@@ -277,6 +277,7 @@ thread.start()
 
 Проблема использования общих ресурсов
 
+sysprog_threading_balance.py
 ```python
 import threading
 
@@ -371,7 +372,7 @@ def child(pipeout):
         time.sleep(zzz)
         msg = ("Spam {:03d}\n".format(zzz)).encode()
         os.write(pipeout, msg)
-        zzz = (zzz+1) % 5
+        zzz = (zzz+1) % 5 # 0, 1, 2, 3, 4, 0, 1,
 
 
 def parent():
@@ -406,6 +407,7 @@ fifoname = "/tmp/pipefifo"
 
 
 def child():
+    print("Child Pid:", os.getpid())
     pipeout = os.open(fifoname, os.O_WRONLY)
     zzz = 0
     while True:
@@ -473,7 +475,7 @@ if __name__ == "__main__":
     sthread.start()
     # do wait for children to exit
     for i in range(5):
-        cthread = Thread(target=client, args=("client{}".format(i,))
+        cthread = Thread(target=client, args=("client{}".format(i),))
         cthread.start()
 ```
 
@@ -490,14 +492,16 @@ mode = int(sys.argv[1])
 
 if mode == 1:
     # run server in this process
+    print("Server")
     server()
 elif mode == 2:
+    print("Client")
     # run client in this process
     client("client:process={}".format(os.getpid()))
 else:
     # run 5 client threads in process
     for i in range(5):
-    Thread(target=client, args=("client:thread={}".format(i,))).start()
+        Thread(target=client, args=("client:process={}:thread={}".format(os.getpid(), i),)).start()
 ```
 
 ### Сигналы
