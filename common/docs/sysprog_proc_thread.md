@@ -177,17 +177,18 @@ parent()
 
 sysprog_thread_join.py
 ```python
-import _thread as thread, time
+import _thread as thread
+import time
 
 
 def counter(tid, count):
     for i in range(count):
         time.sleep(1)
         print("[{}] => {}".format(tid, i))
-        # exitmutexes[i] = True
+    # exitmutexes[tid] = True
 
 
-# exitmutexes = [False] * 10
+# exitmutexes = [False] * 5  # [False, False, ..., False]
 
 for i in range(5):
     thread.start_new_thread(counter, (i, 10))
@@ -206,7 +207,7 @@ import _thread as thread
 
 
 stdoutmutex = thread.allocate_lock()
-exitmutexes = [False] * 10
+exitmutexes = [False] * 5
 
 
 def counter(myId, count):
@@ -217,7 +218,7 @@ def counter(myId, count):
     exitmutexes[myId] = True
 
 
-for i in range(10):
+for i in range(5):
     thread.start_new_thread(counter, (i, 10))
 
 while False in exitmutexes:
