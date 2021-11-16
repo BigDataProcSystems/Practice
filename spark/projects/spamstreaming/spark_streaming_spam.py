@@ -35,7 +35,7 @@ def predict_wrapper(br_bin_model, br_spam_model):
 
     def predict(messages):
         """
-        Classify messages in each partition
+        Classify messages in each partition.
 
         Note: Commonly messages are processed on multiple nodes,
         so sklearn must be installed on each of them

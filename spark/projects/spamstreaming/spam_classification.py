@@ -29,7 +29,7 @@ BERNOULLI_ALPHA = 0.01
 def load_data(file_path=INPUT_DATASET_PATH):
 
     def convert2bool(el):
-        return 0 if el == "ham" else 1
+        return int(el == "spam")
 
     columns = ["class", "message"]
     converters = {"class": convert2bool}
