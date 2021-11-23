@@ -93,7 +93,7 @@ Install `redis-py`:
 
 ## Web service
 
-[Source code](https://github.com/BigDataProcSystems/Spark_Streaming/tree/master/projects/webservice/service/WordCountService)
+[Source code](../projects/webservice/service/WordCountService)
 
 ![Service Architecture Diagram](img/web_service_diagram.png "Service Architecture")
 <center><i>Figure 1. Web Service Architecture</i></center>
@@ -335,7 +335,7 @@ or
 
 #### Kafka consumer
 
-Apply the Kafka consumer as an input source. Below code snippet exemplifies how to use Kafka inside a `Spark Streaming` application. The full source code is available [here](https://github.com/BigDataProcSystems/Spark_Streaming/tree/master/projects/webservice/sparkstreaming)
+Apply the Kafka consumer as an input source. Below code snippet exemplifies how to use Kafka inside a `Spark Streaming` application. The full source code is available [here](../projects/webservice/sparkstreaming)
 
 ```python
 import json
@@ -435,7 +435,7 @@ Web UI:
 
 Start the `Zookeeper` Server:
 
-$ZOOKEEPER_HOME/bin/zkServer.sh start`
+`$ZOOKEEPER_HOME/bin/zkServer.sh start`
 
 Run the `Kafka` server:
 
