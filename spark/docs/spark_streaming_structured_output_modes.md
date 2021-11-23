@@ -4,14 +4,14 @@ Sergei Yu. Papulin (papulin.study@yandex.ru)
 
 ## Contents
 
-- Prerequisites
-- Source Code
-- Running application
-    - Complete Mode and Console Sink
-    - Update Mode and Console Sink
-    - Complete Mode and ForeachBatch Sink
-    - Update MOde and ForeachBatch Sink
-- References
+- [Prerequisites](#Prerequisites)
+- [Source Code](#Source-Code)
+- [Running Application](#Running-Application)
+    - [Complete Mode and Console Sink](#Complete-Mode-and-Console-Sink)
+    - [Update Mode and Console Sink](#Update-Mode-and-Console-Sink)
+    - [Complete Mode and ForeachBatch Sink](#Complete-Mode-and-ForeachBatch-Sink)
+    - [Update Mode and ForeachBatch Sink](#Update-Mode-and-ForeachBatch-Sink)
+- [References](#References)
 
 ## Prerequisites
 
@@ -29,7 +29,7 @@ To get started, you need to have done the following:
 - Spark Structured Streaming Application ([complete_update_streaming.py](../projects/structuredstreaming/complete_update_streaming.py))
 
 
-## Running application
+## Running Application
 
 
 
