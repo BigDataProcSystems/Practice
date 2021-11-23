@@ -4,16 +4,16 @@ Sergei Yu. Papulin (papulin.study@yandex.ru)
 
 ## Contents
 
-- Prerequisites
-- Spark configuration
-- Datasets
-- Source Code
-- Model Fitting Application
-- Data Transforming Application (for debugging)
-- Stream Source
-- Spark Streaming Application
-- Running application
-- References
+- [Prerequisites](#Prerequisites)
+- [Architecture](#Architecture)
+- [Source Code](#Source-Code)
+- [Custom Model](#Custom-Model)
+- [Model Fitting Application](#Model-Fitting-Application)
+- [Data Transforming Application](#Data-Transforming-Application)
+- [Stream Source](#Stream-Source)
+- [Spark Streaming Application](#Spark-Streaming-Application)
+- [Running Application](#Running-Application)
+- [References](#References)
 
 ## Prerequisites
 
@@ -157,7 +157,9 @@ if __name__ == "__main__":
     main()
 ```
 
-## Data Transforming Application (for debugging)
+## Data Transforming Application 
+
+Used for debugging
 
 Source code: [transform_data.py](../projects/updatestreaming/transform_data.py)
 
@@ -341,7 +343,7 @@ if __name__ == "__main__":
     main()
 ```
 
-## Running application
+## Running Application
 
 Initial structure of the project:
 

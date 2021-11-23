@@ -3,14 +3,14 @@ Sergei Yu. Papulin (papulin.study@yandex.ru)
 
 ## Contents
 
-- Prerequisites
-- Spark configuration
-- Kafka configuration
-- Installing and running Redis
-- Web service
-- Running as OS service
-- Spark Streaming Application
-- Deploying Web Service and Spark Streaming application
+- [Prerequisites](#References)
+- [Spark Configuration](#Spark-Configuration)
+- [Kafka Configuration](#Kafka-Configuration)
+- [Installing and Running Redis](#Installing-and-Running-Redis)
+- [Web Service](#Web-Service)
+- [Running as OS Service](#Running-as-OS-Service)
+- [Spark Streaming Application](#Spark-Streaming-Application)
+- [Deploying Web Service and Spark Streaming Application](#Deploying-Web-Service-and-Spark-Streaming-Application)
 
 ## Prerequisites
 
@@ -37,17 +37,17 @@ Java coding (for `Web Service`):
 - Jedis 2.9.3
 
 
-## Spark configuration
+## Spark Configuration
 
 In this tutorial the default configuration involves deploying Spark on `YARN` cluster. So you should configure, and run `HDFS` and `YARN`.
 
 The configuration files you can find [here](spark_basics.md).
 
-## Kafka configuration
+## Kafka Configuration
 
 Some examples below require the `Kafka` server as a message broker, so follow [this link](kafka_basics.md) to see guidelines that instruct how to install, configure and run `Kafka`
 
-## Installing and running Redis 
+## Installing and Running Redis 
 
 #### With sudo
 
@@ -91,7 +91,7 @@ Install `redis-py`:
 
 
 
-## Web service
+## Web Service
 
 [Source code](../projects/webservice/service/WordCountService)
 
@@ -130,7 +130,7 @@ Install `redis-py`:
 
 ```
 
-#### Running service
+#### Running Service
 
 `mvn spring-boot:run`
 
@@ -232,7 +232,7 @@ Created-By: Maven Archiver 3.4.0
 Main-Class: org.springframework.boot.loader.JarLauncher
 ```
 
-## Running as OS service
+## Running as OS Service
 
 
 #### Upstart (for Ubuntu 14.04)
@@ -410,7 +410,7 @@ total_counts.foreachRDD(save_top_10_in_redis)
 ```
 
 
-## Deploying Web Service and Spark Streaming application
+## Deploying Web Service and Spark Streaming Application
 
 #### Starting HDFS and Spark on YARN
 
