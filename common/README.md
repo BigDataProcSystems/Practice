@@ -7,3 +7,4 @@ Practice:
 - [System programing using Python. Modules sys and os](notebooks/C1_sysprog_sys_os.ipynb)
 - [Processes, threads and IPC](docs/sysprog_proc_thread.md)
 - [Thread synchronization primitives](docs/sysprog_thread_primitives.md)
+- [Application with multiple processes](docs/sysprog_multiprocessing.md)
