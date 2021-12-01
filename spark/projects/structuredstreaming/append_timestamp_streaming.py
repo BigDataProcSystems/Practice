@@ -13,22 +13,22 @@ STREAM_TIMESTAMP_MODE = "include"
 
 
 # Note: Only for the Spark local mode
-APP_CHECKPOINT_DIR = "file:///home/bigdata/structured_streaming/update_timestamp_streaming/checkpoints"
+APP_CHECKPOINT_DIR = "file:///home/ubuntu/BigData/tmp/update_timestamp_streaming/checkpoints"
 
 
 def start_spark():
 
     # Note: spark.executor.* options are not the case in the local mode
     #  as all computation happens in the driver.
-    conf = pyspark.SparkConf() \
-        .set("spark.executor.memory", "1g") \
-        .set("spark.executor.core", "2") \
+    conf = pyspark.SparkConf()\
+        .set("spark.executor.memory", "1g")\
+        .set("spark.executor.core", "2")\
         .set("spark.driver.memory", "2g")
 
-    spark = SparkSession \
-        .builder \
-        .appName("appendTimestampApp") \
-        .config(conf=conf) \
+    spark = SparkSession\
+        .builder\
+        .appName("appendTimestampApp")\
+        .config(conf=conf)\
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("ERROR")
@@ -45,12 +45,12 @@ def start_spark():
 
 def load_input_stream(spark, include_timestamp=True):
     """Load stream."""
-    return spark \
-        .readStream \
-        .format("socket") \
-        .option("host", STREAM_HOST) \
-        .option("port", STREAM_PORT) \
-        .option("includeTimestamp", include_timestamp) \
+    return spark\
+        .readStream\
+        .format("socket")\
+        .option("host", STREAM_HOST)\
+        .option("port", STREAM_PORT)\
+        .option("includeTimestamp", include_timestamp)\
         .load()
 
 
@@ -58,7 +58,7 @@ def load_input_stream(spark, include_timestamp=True):
 
 def transformation_include_item(stream):
     """Raw input data with timestamp when an item arrived."""
-    return stream \
+    return stream\
         .withColumnRenamed("value", "number")
 
 
@@ -66,8 +66,8 @@ def transformation_include_item(stream):
 
 def transformation_include_batch(stream):
     """Raw input data with timestamp when processing is started."""
-    return stream \
-        .withColumn("timestamp", F.current_timestamp()) \
+    return stream\
+        .withColumn("timestamp", F.current_timestamp())\
         .withColumnRenamed("value", "number")
 
 
@@ -80,9 +80,9 @@ def transformations_embedded_steps(stream):
     schema.add("number", StringType())
     schema.add("timestamp", StringType())
 
-    return stream \
-        .select("*", F.from_json("value", schema).alias("data")) \
-        .select("*", "data.*") \
+    return stream\
+        .select("*", F.from_json("value", schema).alias("data"))\
+        .select("*", "data.*")\
         .select("*", F.to_timestamp("timestamp").alias("datetime"))
 
 
@@ -93,21 +93,21 @@ def transformations_embedded(stream):
     schema.add("number", StringType())
     schema.add("timestamp", StringType())
 
-    return stream \
-        .select(F.from_json("value", schema).alias("data")) \
+    return stream\
+        .select(F.from_json("value", schema).alias("data"))\
         .select("data.number", F.to_timestamp("data.timestamp").alias("timestamp"))
 
 
 def start_query(output):
 
-    return output \
-        .writeStream \
-        .outputMode("append") \
-        .format("console") \
-        .trigger(processingTime="10 seconds") \
-        .option("checkpointLocation", APP_CHECKPOINT_DIR) \
-        .queryName("query") \
-        .option("truncate", "false") \
+    return output\
+        .writeStream\
+        .outputMode("append")\
+        .format("console")\
+        .trigger(processingTime="10 seconds")\
+        .option("checkpointLocation", APP_CHECKPOINT_DIR)\
+        .queryName("query")\
+        .option("truncate", "false")\
         .start()
 
 

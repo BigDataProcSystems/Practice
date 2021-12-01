@@ -13,23 +13,23 @@ STREAM_PORT = 9999
 APP_OUTPUT_SINK = "console"
 
 # Note: Only for the Spark local mode
-APP_CHECKPOINT_DIR = "file:///home/bigdata/structured_streaming/window_append_streaming/checkpoints"
-APP_DATA_OUTPUT_DIR = "file:///home/bigdata/structured_streaming/window_append_streaming/output"
+APP_CHECKPOINT_DIR = "file:///home/ubuntu/BigData/tmp/structured_streaming/window_append_streaming/checkpoints"
+APP_DATA_OUTPUT_DIR = "file:///home/ubuntu/BigData/tmp/structured_streaming/window_append_streaming/output"
 
 
 def start_spark():
 
     # Note: spark.executor.* options are not the case in the local mode
     #  as all computation happens in the driver.
-    conf = pyspark.SparkConf() \
-        .set("spark.executor.memory", "1g") \
-        .set("spark.executor.core", "2") \
+    conf = pyspark.SparkConf()\
+        .set("spark.executor.memory", "1g")\
+        .set("spark.executor.core", "2")\
         .set("spark.driver.memory", "2g")
 
-    spark = SparkSession \
-        .builder \
-        .appName("windowAppendApp") \
-        .config(conf=conf) \
+    spark = SparkSession\
+        .builder\
+        .appName("windowAppendApp")\
+        .config(conf=conf)\
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("ERROR")
@@ -38,12 +38,12 @@ def start_spark():
 
 
 def load_input_stream(spark):
-    return spark \
-        .readStream \
-        .format("socket") \
-        .option("host", STREAM_HOST) \
-        .option("port", STREAM_PORT) \
-        .option("includeTimestamp", "true") \
+    return spark\
+        .readStream\
+        .format("socket")\
+        .option("host", STREAM_HOST)\
+        .option("port", STREAM_PORT)\
+        .option("includeTimestamp", "true")\
         .load()
 
 
@@ -55,34 +55,34 @@ def stringify_window(s):
 
 def transformations(stream):
     """Group by value and window."""
-    return stream.withWatermark("timestamp", "15 seconds") \
-        .groupBy("value", F.window("timestamp", "30 seconds", "15 seconds")) \
-        .count() \
-        .select(stringify_window("window").alias("window"), "value", "count") \
+    return stream.withWatermark("timestamp", "15 seconds")\
+        .groupBy("value", F.window("timestamp", "30 seconds", "15 seconds"))\
+        .count()\
+        .select(stringify_window("window").alias("window"), "value", "count")\
         .coalesce(1)
 
 
 def start_query_console(output):
     """Start a query with the console sink type."""
-    return output.writeStream \
-        .option("checkpointLocation", APP_CHECKPOINT_DIR) \
-        .outputMode("append") \
-        .format("console") \
-        .queryName("wordcount_query") \
-        .option("truncate", False) \
-        .trigger(processingTime="15 seconds") \
+    return output.writeStream\
+        .option("checkpointLocation", APP_CHECKPOINT_DIR)\
+        .outputMode("append")\
+        .format("console")\
+        .queryName("wordcount_query")\
+        .option("truncate", False)\
+        .trigger(processingTime="15 seconds")\
         .start()
 
 
 def start_query_csv(output):
     """Start a query with the console sink type."""
-    return output.writeStream \
-        .format("csv") \
-        .partitionBy("window") \
-        .option("checkpointLocation", APP_CHECKPOINT_DIR) \
-        .option("path", APP_DATA_OUTPUT_DIR) \
-        .trigger(processingTime="10 seconds") \
-        .outputMode("append") \
+    return output.writeStream\
+        .format("csv")\
+        .partitionBy("window")\
+        .option("checkpointLocation", APP_CHECKPOINT_DIR)\
+        .option("path", APP_DATA_OUTPUT_DIR)\
+        .trigger(processingTime="10 seconds")\
+        .outputMode("append")\
         .start()
 
 

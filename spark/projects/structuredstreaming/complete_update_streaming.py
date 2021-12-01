@@ -13,19 +13,21 @@ STREAM_QUERY_MODE = "complete"
 STREAM_QUERY_TRIGGER = "10 seconds"
 STREAM_QUERY_TRUNCATE = False
 
+APP_CHECKPOINT_DIR = "file:///home/ubuntu/BigData/tmp/structured_streaming/complete_update_streaming/checkpoints"
+
 
 def start_spark():
 
     # Note: spark.executor.* options are not the case in the local mode
     #  as all computation happens in the driver.
-    conf = pyspark.SparkConf() \
-        .set("spark.executor.memory", "1g") \
-        .set("spark.executor.core", "2") \
+    conf = pyspark.SparkConf()\
+        .set("spark.executor.memory", "1g")\
+        .set("spark.executor.core", "2")\
         .set("spark.driver.memory", "2g")
 
-    spark = SparkSession \
-        .builder \
-        .config(conf=conf) \
+    spark = SparkSession\
+        .builder\
+        .config(conf=conf)\
         .getOrCreate()
 
     spark.sparkContext.setLogLevel("ERROR")
@@ -34,53 +36,54 @@ def start_spark():
 
 
 def load_input_stream(spark):
-	"""Load stream."""
-    return spark \
-        .readStream \
-        .format("socket") \
-        .option("host", STREAM_HOST) \
-        .option("port", STREAM_PORT) \
+    """Load stream."""
+    return spark\
+        .readStream\
+        .format("socket")\
+        .option("host", STREAM_HOST)\
+        .option("port", STREAM_PORT)\
         .load()
 
 
-def transformations(stream):
+def transform(stream):
     """Count words."""
-    return stream \
-        .select(F.explode(F.split("value", " ")).alias("word")) \
-        .groupBy("word") \
+    return stream\
+        .select(F.explode(F.split("value", " ")).alias("word"))\
+        .groupBy("word")\
         .count()
 
 
 def start_query(output, mode):
 
-    return output \
-        .writeStream \
-        .outputMode(mode) \
-        .format(STREAM_QUERY_SINK) \
-        .trigger(processingTime=STREAM_QUERY_TRIGGER) \
-        .queryName("wordcount_query") \
-        .option("truncate", STREAM_QUERY_TRUNCATE) \
+    return output\
+        .writeStream\
+        .outputMode(mode)\
+        .option("checkpointLocation", APP_CHECKPOINT_DIR)\
+        .format(STREAM_QUERY_SINK)\
+        .trigger(processingTime=STREAM_QUERY_TRIGGER)\
+        .queryName("wordcount_query")\
         .start()
 
 
 def sort_batch(df, epoch_id):
     """Sort mini-batch and write to console."""
-    df.sort(F.desc("count")) \
-        .limit(4) \
-        .write \
-        .format("console") \
+    df.sort(F.desc("count"))\
+        .limit(4)\
+        .write\
+        .format("console")\
         .save()
 
 
 def start_query_with_custom_sink(output, mode):
     """Start a query with the foreachBatch sink type."""
-    return output \
-        .writeStream \
-        .foreachBatch(sort_batch) \
-        .outputMode(mode) \
-        .trigger(processingTime=STREAM_QUERY_TRIGGER) \
-        .queryName("wordcount_query") \
-        .option("truncate", STREAM_QUERY_TRUNCATE) \
+    return output\
+        .writeStream\
+        .foreachBatch(sort_batch)\
+        .outputMode(mode)\
+        .option("checkpointLocation", APP_CHECKPOINT_DIR)\
+        .trigger(processingTime=STREAM_QUERY_TRIGGER)\
+        .queryName("wordcount_query")\
+        .option("truncate", STREAM_QUERY_TRUNCATE)\
         .start()
 
 
@@ -91,7 +94,7 @@ def main(mode, sink):
 
     spark_session = start_spark()
     lines = load_input_stream(spark_session)
-    output = transformations(lines)
+    output = transform(lines)
 
     if sink == "foreach":
         query = start_query_with_custom_sink(output, mode)
