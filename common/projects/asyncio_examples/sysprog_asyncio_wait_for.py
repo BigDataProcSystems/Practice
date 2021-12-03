@@ -1,6 +1,5 @@
 import asyncio
 import random
-import argparse
 
 
 async def run_task():
@@ -9,7 +8,6 @@ async def run_task():
 
 
 async def run_job_with_error():
-    # returns coroutine
     try:
         result = await asyncio.wait_for(run_task(), 1)
         if result:
