@@ -1,0 +1,14 @@
+[Unit]
+Description=Sysprog service
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Environment=PYTHONUNBUFFERED=1
+Type=simple
+ExecStart=/home/ubuntu/ML/anaconda3/bin/python3.7 /home/ubuntu/IdeaProjects/c5/sysprog_server.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
