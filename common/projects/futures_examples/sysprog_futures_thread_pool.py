@@ -3,7 +3,7 @@ import time
 import random
 import threading
 
-from concurrent.futures import Future, ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 
 
 def run_task(task_id):
