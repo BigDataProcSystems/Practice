@@ -18,5 +18,5 @@ COPY app /app
 # Public port (it doesn't actually open the port)
 EXPOSE 9998
 
-# Run the following command when start a container?
+# Run the following command when start a container
 CMD ["python3", "/app/sysprog_server.py", "--server"]
