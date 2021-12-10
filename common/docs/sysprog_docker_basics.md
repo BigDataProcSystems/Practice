@@ -197,9 +197,13 @@ docker container ls -a
 docker build --tag server:1.0 --file server-1.0.Dockerfile .
 ```
 
+Запустите контейнер с сервером в фоном режиме:
+
 ```
-docker run -itd --name server server:1.0
+docker run -d --name server server:1.0
 ```
+
+Запустите `netcat` внутри контейнера и выполните обращение к серверу:
 
 ```
 docker exec -it server nc 0.0.0.0 9998
@@ -216,7 +220,7 @@ docker stop server && docker rm server
 Запустите контейнер с открытым портом:
 
 ```
-docker run -itd --publish 9999:9998 --name server server:1.0
+docker run -d --publish 9999:9998 --name server server:1.0
 ```
 
 Проверьте работоспособность сервер из терминала хоста:
@@ -235,8 +239,21 @@ docker stop server && docker rm server
 
 ### Доступ к серверу через хост
 
+
+```
+docker network inspect bridge
+```
+
 ```
 ip addr show docker0
+```
+
+```
+docker run -d -p 9999:9998 --name client server:1.0 python3 /app/sysprog_server.py --server --host 172.17.0.2
+```
+
+```
+docker run -itd --name client server:1.0 python3 /app/sysprog_server.py --client --host 172.17.0.2
 ```
 
 ```
@@ -410,9 +427,31 @@ docker exec server cat /app/app.log
 
 ### Bind
 
+Монтирование директории с логами:
+
+- сервер
+
 ```
-docker run -d --volume $(pwd)/app:/app --network=sysprog-network --name client server:1.1 --client --host server
+docker run -d --volume $(pwd)/server:/app/logs --network=sysprog-network --name server server:1.1 --server --host server
 ```
+
+- клиент
+
+```
+docker run -itd --volume $(pwd)/client:/app/logs --network=sysprog-network --name client server:1.1 --client --host server
+```
+
+
+```
+docker stop client && docker rm client
+```
+
+Изменение кода программы без повторного построения образа:
+
+```
+docker run -itd --volume $(pwd)/app:/app --network=sysprog-network --name client server:1.1 --client --host server
+```
+
 
 
 ## Взаимодействие с Redis
