@@ -7,6 +7,7 @@ RUN \
         nano \
         tree \
         netcat \
+        iputils-ping \
     && apt clean && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
 # Create the app directory
