@@ -239,26 +239,42 @@ docker stop server && docker rm server
 
 ### Доступ к серверу через хост
 
+Выведите список сетей:
+
+```
+docker network ls
+```
+
+Отобразите информацию о `bridge` сети, которая используется как сеть по умолчанию при запуске контейнера:
 
 ```
 docker network inspect bridge
 ```
 
+Шлюз этой сети можно определить через команду:
+
 ```
 ip addr show docker0
 ```
+
+⚠️ **Замечание.**  В сети `bridge`, которая используется по умолчанию, нет возможности обращаться по наименованию контейнера, только по IP адресу.
+
+Запустите сервер в сети по умолчанию:
 
 ```
 docker run -d -p 9999:9998 --name client server:1.0 python3 /app/sysprog_server.py --server --host 172.17.0.2
 ```
 
+В качестве параметра `host` указан адрес, который будет назначен контейнеру.
+
+
+Запустите клиента в той же сети:
+
 ```
 docker run -itd --name client server:1.0 python3 /app/sysprog_server.py --client --host 172.17.0.2
 ```
 
-```
-docker run -itd --name client server:1.0 python3 /app/sysprog_server.py --client --host 172.17.0.1 --port 9999
-```
+Теперь клиент может напрямую обратиться к серверу:
 
 ```
 docker attach client
@@ -267,16 +283,35 @@ docker attach client
 ```
 Ctrl+p + Ctrl+q
 ```
+
+
 
 ```
 docker stop client && docker rm client
 ```
 
+
+⚠️ **Замечание.**  Если указать в качестве host шлюз сети и внешний порт сервера, то клиент так же сможет получить доступ к серверу, но через хост. Пример команды: 
+
+```
+docker run -itd --name client server:1.0 python3 /app/sysprog_server.py --client --host 172.17.0.1 --port 9999
+```
+
 ### Запуск клиента в режиме хоста
+
+Запустите сервер:
+
+```
+docker run -d --publish 9999:9998 --name server server:1.0
+```
+
+Запустите клиента в режиме хоста:
 
 ```
 docker run -itd --network=host --name client server:1.0 python3 /app/sysprog_server.py --client --port 9999
 ```
+
+Клиент теперь работает как отдельный процесс хоста и может обращаться к серверу с использованием порта 9999:
 
 ```
 docker attach client
@@ -286,22 +321,30 @@ docker attach client
 Ctrl+p + Ctrl+q
 ```
 
+Остановите и удалите контейнеры клиента и сервер.
+
 ```
 docker stop client server && docker rm client server
 ```
 
-## Запуск сервера и клиента в одной сети
+## Запуск сервера и клиента в собственной сети
 
 
 ### Создание сети
+
+Создайте собственную `bridge` сеть:
 
 ```
 docker network create --driver=bridge --subnet=10.0.1.0/16 sysprog-network
 ```
 
+Отобразите список сетей:
+
 ```
 docker network ls
 ```
+
+Выведите настройки сети:
 
 ```
 docker network inspect sysprog-network
@@ -313,59 +356,87 @@ docker network inspect sysprog-network
 
 - исходный код: [server-1.1.Dockerfile](../projects/docker_examples/simple_server/server-1.1.Dockerfile)
 
-
+Постройте новый образ:
 
 ```
 docker build --tag server:1.1 --file server-1.1.Dockerfile .
 ```
 
+Запустите сервер и в качестве параметра `host` укажите имя контейнера сервера:
+
 ```
 docker run -d --network=sysprog-network --name server server:1.1 --server --host server
 ```
+
+Запустите клиента и в качестве параметра `host` укажите имя контейнера сервера:
 
 ```
 docker run -d --network=sysprog-network --name client server:1.1 --client --host server
 ```
 
-```
-docker exec server ps aux
-```
+⚠️ **Замечание.**  В собственной сети `bridge` можно обращаться по наименованию контейнера.
 
-```
-docker exec client ps aux
-```
+Проверьте, что контейнеры запущены:
 
 ```
 docker container ls --no-trunc
 ```
 
+Или можно через команды
+
+```
+docker exec server ps aux
+```
+
+и
+
+```
+docker exec client ps aux
+```
+
+Проверьте, что запущенные контейнеры принадлежат созданной сети:
+
 ```
 docker network inspect sysprog-network
 ```
+
+Подключите терминал клиента:
 
 ```
 docker attach client
 ```
 
+После ввода слов переведите клиента в фоновый режим работы:
+
+```
+Ctrl+p + Ctrl+q
+```
+
+Проверьте логи сервера и клиента:
 
 ```
 docker exec server cat /app/server.log
 ```
 
 ```
-Ctrl+p + Ctrl+q
+docker exec client cat /app/client.log
 ```
+
+Остановите и удалите контейнеры клиента и сервер:
 
 ```
 docker stop client server && docker rm client server
 ```
 
-
 ## Использование постоянного хранилища данных
 
 ### Volume
 
+`/var/lib/docker/volumes`
+
 #### Именованный том
+
+
 
 ```
 docker volume create --driver local sysprog-volume
@@ -441,6 +512,7 @@ docker run -d --volume $(pwd)/server:/app/logs --network=sysprog-network --name 
 docker run -itd --volume $(pwd)/client:/app/logs --network=sysprog-network --name client server:1.1 --client --host server
 ```
 
+Остановите и удалите контейнер клиента:
 
 ```
 docker stop client && docker rm client
@@ -448,11 +520,33 @@ docker stop client && docker rm client
 
 Изменение кода программы без повторного построения образа:
 
+- подключите к контейнеру клиента директорию с приложением
+
 ```
 docker run -itd --volume $(pwd)/app:/app --network=sysprog-network --name client server:1.1 --client --host server
 ```
 
+- остановите контейнер клиента:
 
+```
+docker stop client
+```
+
+- измените формат вывода запроса
+
+- повторно запустите контейнер клиента:
+
+```
+docker start client
+```
+
+- проверьте изменился ли формат вывода
+
+Остановите и удалите контейнеры клиента и сервер:
+
+```
+docker stop client server && docker rm client server
+```
 
 ## Взаимодействие с Redis
 
