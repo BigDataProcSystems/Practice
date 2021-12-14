@@ -7,7 +7,7 @@
 - [Основные команды Docker CLI](#Основные-команды-Docker-CLI)
 - [Запуск сервера](#Запуск-сервера)
 - [Запуск клиента](#Запуск-клиента)
-- [Запуск сервера и клиента в одной сети](#Запуск-сервера-и-клиента-в-одной-сети)
+- [Запуск сервера и клиента в собственной сети](#Запуск-сервера-и-клиента-в-собственной-сети)
 - [Использование постоянного хранилища данных](#Использование-постоянного-хранилища-данных)
 - [Взаимодействие с Redis](#Взаимодействие-с-Redis)
 
@@ -430,63 +430,78 @@ docker stop client server && docker rm client server
 
 ## Использование постоянного хранилища данных
 
-### Volume
+### Монтирование посредством `volume`
 
-`/var/lib/docker/volumes`
+⚠️ **Замечание.** Создаваемые тома можно найти в директории `/var/lib/docker/volumes`
 
 #### Именованный том
 
-
+Создайте новый локальный том:
 
 ```
 docker volume create --driver local sysprog-volume
 ```
 
+Выведите список томов:
+
 ```
 docker volume ls
 ```
 
+Отобразите конфигурацию созданного тома:
 
 ```
 docker volume inspect sysprog-volume
 ```
 
+Создайте и запустите контейнер сервера с локальным томом:
 
 ```
 docker run -d --volume sysprog-volume:/app --network=sysprog-network --name server server:1.1 --server --host server
 ```
 
-Замечание. Если том ещё не существует, то он будет создан при запуске контейнера
+⚠️ **Замечание.** Если том ещё не существует, то он будет создан при запуске контейнера
+
+Создайте и запустите контейнер клиента:
 
 ```
 docker run -d --network=sysprog-network --name client server:1.1 --client --host server
 ```
 
+Выведите на передний план запущенный процесс клиента:
+
 ```
 docker attach client
 ```
+
+Переведите контейнер в фоновый режим работы:
 
 ```
 Ctrl+p + Ctrl+q
 ```
 
+Отобразите события обработки запросов сервером:
 
 ```
-docker exec server cat /app/app.log
+docker exec server cat /app/logs/server.log
 ```
+
+Остановите и удалите контейнеры клиента и сервера:
 
 ```
 docker stop client server && docker rm client server
 ```
 
+Повторно создайте и запустите контейнер сервера:
 
 ```
 docker run -d --volume sysprog-volume:/app --network=sysprog-network --name server server:1.1 --server --host server
 ```
 
+Проверьте, что логи не были удалены вместе с контейнером:
 
 ```
-docker exec server cat /app/app.log
+docker exec server cat /app/logs/server.log
 ```
 
 #### Анонимный том
@@ -496,7 +511,7 @@ docker exec server cat /app/app.log
 ```
 
 
-### Bind
+### Монтирование посредством `bind mound`
 
 Монтирование директории с логами:
 
@@ -560,10 +575,13 @@ docker run -d --name redis -p 6379:6379 -v redis-data:/data redis:6.0.16-alpine 
 
 ### Запись и чтение данных посредством Redis CLI
 
+Запустите Redis CLI:
 
 ```
 docker exec -it redis redis-cli
 ```
+
+Введите команды:
 
 ```
 SET requests 0
