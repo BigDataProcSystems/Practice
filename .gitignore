@@ -7,5 +7,5 @@ target
 *.class
 *.iml
 *.log
-*_debug.md
+*debug
 *.drawio
