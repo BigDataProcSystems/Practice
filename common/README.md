@@ -14,4 +14,4 @@
 - [Application containerization using Docker](docs/sysprog_docker_basics.md)
 
 ### Projects:
-- [Source code](../projects)
+- [Source code](projects)
