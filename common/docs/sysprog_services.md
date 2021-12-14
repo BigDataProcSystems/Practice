@@ -1,6 +1,6 @@
 # Создание системных сервисов в Linux
 
-Сергей Ю. Папулин (papulin_bmstu@mail.ru)
+C.Ю. Папулин (papulin_bmstu@mail.ru)
 
 ### Содержание
 
@@ -11,183 +11,82 @@
 
 ## Запуск сервиса посредством `systemd`
 
-### Сервер
+### Создание собственного сервиса 
 
-Код сервер
+Проект: [system_service_examples](../projects/system_service_examples)
 
-sysprog_server.py
-```python
-import os
+Напишите код сервера:
+- [sysprog_server.py](../projects/system_service_examples/sysprog_server.py)
 
-from socket import socket, AF_INET, SOCK_STREAM
+Напишите код клиента:
+- [sysprog_client.py](../projects/system_service_examples/sysprog_client.py)
 
-HOST = ""
-PORT = 9998
+Создайте описание службы:
+- [.service](../projects/system_service_examples/.service)
 
-
-def server():
-    print("Server [{}]".format(os.getpid()))
-    sock = socket(AF_INET, SOCK_STREAM)
-    sock.bind((HOST, PORT))
-    sock.listen(5)
-    while True:
-        conn, addr = sock.accept()
-        data = conn.recv(1024)
-        print("received request [{}]".format(data))
-        # reverse data
-        conn.send(data.decode()[::-1].encode())
-
-
-if __name__ == "__main__":
-    server()
-```
-
-### Клиент
-
-Код клиента
-
-service.py
-```python
-from socket import socket, AF_INET, SOCK_STREAM
-
-
-HOST = ""
-PORT = 9998
-
-
-def client(data):
-    sock = socket(AF_INET, SOCK_STREAM)
-    sock.connect((HOST, PORT))
-    sock.send(data.encode())
-    reply = sock.recv(1024).decode()
-    sock.close()
-    print("sent [{}] => received: [{}]".format(data, reply))
-
-
-if __name__ == "__main__":
-    while True:
-        data = input()
-        if not data:
-            break
-        client(data)
-```
-
-
-### Служба
-
-Описание службы
-
-.service
-```ini
-[Unit]
-Description=Sysprog service
-Wants=network-online.target
-After=network-online.target
-
-[Service]
-Environment=PYTHONUNBUFFERED=1
-Type=simple
-ExecStart=/home/ubuntu/ML/anaconda3/bin/python3.7 /home/ubuntu/IdeaProjects/c5/sysprog_server.py
-Restart=always
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Скрип для управления сервисом:
-
-- bash скрипт
+Скопируйте `.service` в директорию сервисов:
 
 ```bash
-# TODO
+sudo cp .service /etc/systemd/system/sysprog.service
 ```
 
-- python скрипт
+Перезагрузите менеджер конфигурации:
 
-service.py
-```python
-#!/usr/bin/env python
-
-import os
-import argparse
-
-
-def deploy():
-    # 1. Copy service from a develop dir to the systemd directory
-    # 2. Reload systemd manager configuration
-    # 3. Start the sysprog service
-    os.system(
-        """
-        sudo cp .service /etc/systemd/system/sysprog.service \
-        && sudo systemctl daemon-reload \
-        && sudo systemctl start sysprog
-        """
-    )
-
-
-def start():
-    os.system("sudo systemctl start sysprog")
-
-
-def stop():
-    os.system("sudo systemctl stop sysprog")
-
-
-def restart():
-    os.system("sudo systemctl restart sysprog")
-
-
-def show_status():
-    os.system("systemctl status sysprog")
-
-
-def show_logs():
-    os.system("journalctl -u sysprog -f")
-
-
-def run_client():
-    os.system("python sysprog_client.py")
-
-
-if __name__ == "__main__":
-
-    parser = argparse.ArgumentParser(description="")
-    parser.add_argument("-d", "--deploy", action="store_true", help="Deploy the service.")
-    parser.add_argument("-q", "--stop", action="store_true", help="Stop the service.")
-    parser.add_argument("-r", "--start", action="store_true", help="Start the service.")
-    parser.add_argument("-R", "--restart", action="store_true", help="Restart the service.")
-    parser.add_argument("-l", "--logs", action="store_true", help="Show service logs.")
-    parser.add_argument("-s", "--status", action="store_true", help="Show service status.")
-    parser.add_argument("-c", "--client", action="store_true", help="Run the client.")
-    args = parser.parse_args()
-
-    if args.deploy:
-        print("Deploying...")
-        deploy()
-    elif args.start:
-        print("Starting...")
-        start()
-    elif args.stop:
-        print("Stopping...")
-        stop()
-    elif args.restart:
-        print("Stopping...")
-        stop()
-    elif args.logs:
-        print("Showing logs...")
-        show_logs()
-    elif args.status:
-        print("Showing status...")
-        show_status()
-    elif args.client:
-        print("Running client...")
-        run_client()
-    print("Done.")
-
+```bash
+sudo systemctl daemon-reload
 ```
 
-Команды `systemctl`
+Запустите службу:
+
+```
+sudo systemctl start sysprog
+```
+
+Проверьте, что сервис успешно запустился:
+
+```
+systemctl status sysprog
+```
+
+Запустите клиента:
+
+```
+python sysprog_client.py
+```
+
+Завершите процесс сервера:
+
+```
+sudo kill $SERVER_PID
+```
+
+Убедитесь, что сервер автоматически запустился после принудительного завершения:
+
+```
+systemctl status sysprog
+```
+
+Выведите журнал сервиса:
+
+```bash
+journalctl -u sysprog -r
+```
+
+
+⚠️ **Замечание.** Состояние сервиса также можно отслеживать через журнал системных событий: `tail -f /var/log/syslog`
+
+
+Напишите `bash` скрипт для управления сервисом:
+
+- [service.sh](../projects/system_service_examples/service.sh)
+
+Напишите `python` скрипт для управления сервисом:
+
+- [service.py](../projects/system_service_examples/service.py)
+
+
+
+### Команды `systemctl`
 
 ```
 systemctl enable|disable|start|stop|...|status service
@@ -204,19 +103,6 @@ systemctl enable|disable|start|stop|...|status service
 |`daemon-reload`|Обновление конфигурации|
 |`status`|Вывод статуса службы|
 
-
-
-Системный события:
-
-```bash
- tail -f /var/log/syslog
-```
-
-Журнал событий сервиса:
-
-```bash
-journalctl -u sysprog -r
-```
 
 ## Запуск периодических задач посредством `cron`
 
