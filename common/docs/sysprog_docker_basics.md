@@ -262,7 +262,7 @@ ip addr show docker0
 Запустите сервер в сети по умолчанию:
 
 ```
-docker run -d -p 9999:9998 --name client server:1.0 python3 /app/sysprog_server.py --server --host 172.17.0.2
+docker run -d -p 9999:9998 --name server server:1.0 python3 /app/sysprog_server.py --server --host 172.17.0.2
 ```
 
 В качестве параметра `host` указан адрес, который будет назначен контейнеру.
@@ -285,9 +285,10 @@ Ctrl+p + Ctrl+q
 ```
 
 
+Остановите и удалите контейнеры клиента и сервер.
 
 ```
-docker stop client && docker rm client
+docker stop client server && docker rm client server
 ```
 
 
