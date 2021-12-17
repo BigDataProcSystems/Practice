@@ -10,12 +10,12 @@ def _setup_logger(is_server=False):
     log_dir = sys.path[0] + "/logs"
     if not os.path.exists(log_dir):
         os.mkdir(log_dir)
-    log_path = log_dir + "/" + ("server" if is_server else "client") + ".log"
+    log_file_path = log_dir + "/" + ("server" if is_server else "client") + ".log"
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(message)s",
         handlers=[
-            logging.FileHandler(log_path),
+            logging.FileHandler(log_file_path),
             logging.StreamHandler()
         ])
 
