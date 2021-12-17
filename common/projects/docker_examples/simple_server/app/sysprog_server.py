@@ -7,6 +7,7 @@ from socket import socket, AF_INET, SOCK_STREAM
 
 def _setup_logger(is_server=False):
     import sys
+    os.mkdir(sys.path[0] + "/logs")
     log_path = sys.path[0] + "/logs/" + ("server" if is_server else "client") + ".log"
     logging.basicConfig(
         level=logging.INFO,
