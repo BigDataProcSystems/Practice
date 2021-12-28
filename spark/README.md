@@ -69,6 +69,12 @@ DataFrame API:
     - [Item-based collaborative filtering](lib/python/recommend/itemrecom.py) (python module)
 - [Комбинация решающих деревьев и Spark MLlib](https://nbviewer.jupyter.org/github/BigDataProcSystems/Practice/blob/master/spark/notebooks/spark_df_purchase_tree.ipynb)
 
+Extra topics:
+
+- [Spark and sklearn models](https://nbviewer.jupyter.org/github/BigDataProcSystems/Practice/blob/master/spark/notebooks/spark_df_sklearn.ipynb)
+- [Image Recognition using SynapseML](https://nbviewer.jupyter.org/github/BigDataProcSystems/Practice/blob/master/spark/notebooks/spark_synapseml.ipynb)
+
+
 ## Spark GraphFrame
 
 #### Lectures:
