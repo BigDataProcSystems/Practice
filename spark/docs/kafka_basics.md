@@ -47,7 +47,7 @@ Create a directory where the `Kafka` will be placed:
 
 Download a `Kafka` archive:
 
-`wget -P ~/Downloads/ http://apache-mirror.rbc.ru/pub/apache/kafka/2.3.0/kafka_2.11-2.3.0.tgz`
+`wget -P ~/Downloads/ https://archive.apache.org/dist/kafka/2.3.0/kafka_2.11-2.3.0.tgz`
 
 Here we use `Kafka` with `Scala` `2.11` that corresponds to the `Scala` version of our `Spark` installation.
 
