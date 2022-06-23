@@ -1,5 +1,5 @@
 # Основные команды в Ubuntu
-Сергей Папулин (papulin_bmstu@mail.ru)
+С.Ю. Папулин (papulin_bmstu@mail.ru)
 
 ### Содержание
 
