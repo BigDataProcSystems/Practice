@@ -3,7 +3,7 @@
 <!-- - [Creating VirtualBox image using Packer]() -->
 ### Python
 - [Python Basics](https://github.com/MLMethods/Practice/blob/master/notebooks/C0_PyBasics.ipynb)
-- [System programing using Python. Modules sys and os](notebooks/C1_sysprog_sys_os.ipynb)
+- [System programing using Python. Modules sys and os](docs/sysprog_sys_os.md)
 - [Processes, threads and IPC](docs/sysprog_proc_thread.md)
 - [Thread synchronization primitives](docs/sysprog_thread_primitives.md)
 - [Application with multiple processes](docs/sysprog_multiprocessing.md)
