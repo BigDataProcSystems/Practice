@@ -70,5 +70,24 @@ def run_imap_unordered():
 
 
 if __name__ == "__main__":
-    run_map()
+    import argparse
+    parser = argparse.ArgumentParser(description="")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("-m", "--map", action="store_true")
+    group.add_argument("-i", "--imap", action="store_true")
+    group.add_argument("-u", "--imap_unordered", action="store_true")
+    group.add_argument("-a", "--map_async", action="store_true")
+    args = parser.parse_args()
 
+    if args.map:
+        print("map")
+        run_map()
+    elif args.imap:
+        print("imap")
+        run_imap()
+    elif args.imap_unordered:
+        print("imap unordered")
+        run_imap_unordered()
+    elif args.map_async:
+        print("map async")
+        run_map_async()
