@@ -21,9 +21,15 @@ To get started, you need to have done the following:
 
 ## Zookeeper installation
 
-Install the server:
+Download and unpack [`Zookeeper 3.5.8`](https://archive.apache.org/dist/zookeeper/zookeeper-3.5.8/apache-zookeeper-3.5.8-bin.tar.gz):
 
-`apt install zookeeperd`
+<!-- Install the server:
+
+`apt install zookeeperd` -->
+
+You can start/stop the server by the following commands:
+
+`$ZOOKEEPER_HOME/bin/zkServer.sh start | stop`
 
 Display a version of the server:
 
@@ -35,9 +41,7 @@ Clients:
  /127.0.0.1:57312[0](queued=0,recved=1,sent=0)
 ```
 
-After the installation the `Zookeeper` server will be started automatically. You can manually start/stop the server by the following commands:
-
-`$ZOOKEEPER_HOME/bin/zkServer.sh start | stop`
+After the installation the `Zookeeper` server will be started automatically. 
 
 ## Kafka installation
 
