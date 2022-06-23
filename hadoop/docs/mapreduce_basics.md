@@ -5,17 +5,17 @@ Sergei Yu. Papulin (papulin_bmstu@mail.ru)
 
 ## Contents
 
-- Prerequisites
-- Configuration
-- MapReduce configuration
-- Starting Hadoop cluster
-- Creating Java project in IntelliJ
-- Java source code for WordCount example
-- Running MapReduce with local files
-- Building `jar` file with `maven`
-- Running MapReduce `jar` file on YARN cluster
-- Applying configuration settings
-- References
+- [Prerequisites](#Prerequisites)
+- [Configuration](#Configuration)
+- [MapReduce configuration](#MapReduce-configuration)
+- [Starting Hadoop cluster](#Starting-Hadoop-cluster)
+- [Creating Java project](#Creating-Java-project)
+- [Java source code of WordCount example](#Java-source-code-of-WordCount-example)
+- [Running MapReduce with local files](#Running-MapReduce-with-local-files)
+- [Building `jar` file with `maven`](#Building-`jar`-file-with-`maven`)
+- [Running MapReduce `jar` file on YARN cluster](#Running-MapReduce-`jar`-file-on-YARN-cluster)
+- [Applying configuration settings](#Applying-configuration-settings)
+- [References](#References)
 
 ## Prerequisites
 
@@ -69,6 +69,12 @@ Set `YARN` as a framework for MapReduce applications
 </property>
 ```
 
+Command to download the configuration file:
+
+```
+wget -O ~/BigData/hadoop/etc/hadoop/mapred-site.xml https://raw.githubusercontent.com/BigDataProcSystems/Practice/master/hadoop/config/mapreduce/mapred-site.xml
+```
+
 ## Starting Hadoop cluster
 
 Run `HDFS`:
@@ -87,15 +93,15 @@ Check out whether all daemons are running:
 
 `jps`
 
-## Creating Java project in IntelliJ (v2019.2)
+## Creating Java project
 
-1) Open IntelliJ
+1) Open IntelliJ (v2019.2)
 2) `Create New Project` on start or `File` -> `Project...`
 3) Select Maven and project SDK 1.8 -> `Next`
 4) GroupId: `edu.classes.mr`; ArtifactId: `word-count-app` -> `Next`
 4) Project name: WordCountApp -> `Finish`
 
-## Java source code for WordCount example
+## Java source code of WordCount example
 
 1. [Main class](../projects/java/WordCountApp/src/main/java/edu/classes/mr/WordCount.java)
 
