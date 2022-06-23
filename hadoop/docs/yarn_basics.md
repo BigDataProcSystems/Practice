@@ -178,6 +178,10 @@ Run a MapReduce example:
 
 Check out the output directory. There should be two files whose names start with `part-r-0000x`. They are the files where the result is stored.
 
+You can use the following option to specify a queue:
+
+`-D mapred.job.queue.name=dev`
+
 ### YARN dashboard
 
 `http://localhost:8088`
