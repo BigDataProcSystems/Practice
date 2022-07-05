@@ -3,8 +3,9 @@
 ## Spark Basics
 
 #### Lectures:
-- [Spark basics](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Spark.pdf)
-- [User-Defined Functions (UDF) in PySpark](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_PySpark_UDF.pdf)
+- [Spark RDD](https://drive.google.com/file/d/1jMTfYdtKAGT5jHaX9QxgwGm-KoYtBRVc/view?usp=sharing)
+- [Spark DataFrame](https://drive.google.com/file/d/1zlj4erLDJTbvsBLYPP-ZArr7lnkIIzLE/view?usp=sharing)
+- [User-Defined Functions (UDF) in PySpark](https://drive.google.com/file/d/1iUC-IlvbvG7AeD-72-5HWJy3MSZqEdKJ/view?usp=sharing)
 
 #### Practice:
 - [Configuring Spark on YARN](docs/spark_basics.md)
@@ -22,8 +23,8 @@
 
 #### Lectures:
 
-- [Spark Streaming](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Spark_Streaming.pdf)
-- [Spark Structured Streaming](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Spark_Streaming_Structured.pdf)
+- [Spark Streaming](https://drive.google.com/file/d/10LpgzZCyGoO_pTvNSS_nf4ybQG1ezcdh/view?usp=sharing)
+- [Spark Structured Streaming](https://drive.google.com/file/d/1lXL00oqy4iVF3ZOkK8j17ECPRdzkYwKv/view?usp=sharing)
 
 #### Practice:
 
@@ -49,9 +50,9 @@ Structured Streaming (DataFrame API):
 
 #### Lectures:
 
-- [Linear Regression With SGD](https://github.com/BigDataProcSystems/Lectures/blob/master/Spark_MLlib_Distributed_SGD.pdf)
-- [Naive Bayes Classification](https://github.com/BigDataProcSystems/Lectures/blob/master/Spark_MLlib_NaiveBayes.pdf)
-- [Recommendation System using ALS](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_ML_RecomSystems.pdf)
+- [Stochastic Gradient Descent](https://drive.google.com/file/d/1tCb3A93A0Fo4tkGCo1ckU3-5zt6Jt8VC/view?usp=sharing)
+- [Naive Bayes Classifier](https://drive.google.com/file/d/13W5If_KIinFKCJpSe0l9_8jQRuI5mD0S/view?usp=sharing)
+- [Recommendation Systems using ALS](https://drive.google.com/file/d/18uJnyk2kP_1Zmn4p5ITnilFjTR0E1xkL/view?usp=sharing)
 
 #### Practice:
 
@@ -79,7 +80,7 @@ Extra topics:
 
 #### Lectures:
 
-- [Spark GraphX](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_GraphX.pdf) (related)
+- [Spark GraphX](https://drive.google.com/file/d/1RaU3pxpnrJRQa1fiFWuUU9Mr5yRLfOxh/view?usp=sharing) (related)
 
 #### Practice:
 
@@ -90,7 +91,7 @@ Extra topics:
 
 #### Lectures:
 
-- [Introduction to Docker](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Docker.pdf) 
+- [Introduction to Docker](https://drive.google.com/file/d/1vb_fAwhB3oZxnukpuMKYRNFJa0bGn74C/view?usp=sharing) 
 
 #### Practice:
 
@@ -102,7 +103,7 @@ Extra topics:
 
 #### Lectures:
 
-- [Spark on Kubernetes](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Spark_K8s.pdf) 
+- [Spark on Kubernetes](https://drive.google.com/file/d/1hKwSqKd-eC3ALg5TxrHQAMDgtUfUTar0/view?usp=sharing) 
 
 #### Practice:
 

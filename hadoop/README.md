@@ -3,15 +3,15 @@
 
 ## HDFS 
 
-- Lecture: [Hadoop Distributed File System (HDFS)](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_HDFS.pdf)
+- Lecture: [Hadoop Distributed File System (HDFS)](https://drive.google.com/file/d/1fTf--ZYqE61wV-tNvZgfUvECYSdWhbXA/view?usp=sharing)
 - Practice: [Introduction to HDFS](docs/hdfs_basics.md)
 
 ## YARN
-- Lecture: [Yet Another Resource Negotiator (YARN)](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_YARN.pdf)
+- Lecture: [Yet Another Resource Negotiator (YARN)](https://drive.google.com/file/d/1omVClBZTXuye6edGJ6-mg9AV0jQ_kaEN/view?usp=sharing)
 - Practice: [Introduction to YARN](docs/yarn_basics.md)
 
 ## MapReduce
-- Lecture: [MapReduce](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_MapReduce.pdf)
+- Lecture: [MapReduce](https://drive.google.com/file/d/1N31ghy9zaQpc-L28XXRJeC-9Gahlurnx/view?usp=sharing)
 
 - Practice:
     - [Introduction to MapReduce](docs/mapreduce_basics.md)
@@ -23,7 +23,7 @@
 
 ## Hadoop on Docker
 
-- Lecture: [Introduction to Docker](https://github.com/BigDataProcSystems/Lectures/blob/master/BigData_Docker.pdf) 
+- Lecture: [Introduction to Docker](https://drive.google.com/file/d/1vb_fAwhB3oZxnukpuMKYRNFJa0bGn74C/view?usp=sharing) 
 - Practice:
     - [Part 1: Introduction](https://github.com/BigDataProcSystems/Docker/blob/master/docs/hadoop_docker_part_1.md)
     - [Part 2: Building Base Hadoop Image](https://github.com/BigDataProcSystems/Docker/blob/master/docs/hadoop_docker_part_2.md)
